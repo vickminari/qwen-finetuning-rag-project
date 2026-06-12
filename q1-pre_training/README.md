@@ -62,13 +62,15 @@ Após a execução, os adaptadores finais estarão na pasta `./q1_cpt_model`.
 
 ### 4. Passo 3: Avaliação do Modelo Pós-Treino (CPT)
 
-Com o modelo treinado, avalie os resultados de perplexidade e perda no mesmo conjunto de validação:
+Com o modelo treinado (ou enquanto os checkpoints intermediários estão na pasta), avalie os resultados de perplexidade e perda no mesmo conjunto de validação:
 
 ```bash
-python evaluate_cpt.py --model_name "Qwen/Qwen3.5-2B-Base" --adapter_path "./q1_cpt_model" --max_samples 50
+python q1-pre_training/evaluate_cpt.py --model_name "Qwen/Qwen3.5-2B-Base" --adapter_path "./q1_cpt_model" --max_samples 50
 ```
 
-O script carregará o modelo base, aplicará o adaptador LoRA de `./q1_cpt_model`, computará as métricas e imprimirá uma tabela mostrando a evolução (ex: a queda na Perplexidade e no Cross-Entropy Loss). Os resultados são salvos em `cpt_evaluation.json`.
+> 💡 **Detecção Automática de Checkpoints:** Se o seu treinamento foi interrompido ou ainda está em andamento (ou seja, não foi salvo na raiz do diretório final), os scripts de avaliação detectam automaticamente a subpasta de checkpoint mais recente (ex: `checkpoint-1000`) dentro de `./q1_cpt_model` e carregam os adaptadores e o tokenizer a partir dela.
+
+O script carregará o modelo base, aplicará o adaptador LoRA correspondente, computará as métricas e imprimirá uma tabela mostrando a evolução (ex: a queda na Perplexidade e no Cross-Entropy Loss). Os resultados são salvos em `cpt_evaluation.json`.
 
 ---
 
