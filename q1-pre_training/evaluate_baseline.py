@@ -69,7 +69,7 @@ def main():
     
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name,
-        torch_dtype=dtype,
+        dtype=dtype,
         device_map="auto",
         trust_remote_code=True
     )
@@ -83,7 +83,9 @@ def main():
             local_txt_path=args.local_txt,
             split_ratio=0.1,
             max_seq_length=2048,
-            seed=42
+            seed=42,
+            only_eval=True,
+            max_samples=args.max_samples
         )
         eval_dataset = dataset_split["test"]
     except Exception as e:

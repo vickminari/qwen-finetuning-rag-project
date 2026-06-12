@@ -63,10 +63,27 @@ def main():
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
+    # ===== PASSO 0: Resolver caminho do adaptador (final ou checkpoint) =====
+    adapter_path = args.adapter_path
+    if os.path.exists(adapter_path):
+        if not os.path.exists(os.path.join(adapter_path, "adapter_config.json")):
+            checkpoints = [
+                os.path.join(adapter_path, d)
+                for d in os.listdir(adapter_path)
+                if d.startswith("checkpoint-") and os.path.isdir(os.path.join(adapter_path, d))
+            ]
+            if checkpoints:
+                checkpoints.sort(key=lambda x: int(x.split("-")[-1]))
+                adapter_path = checkpoints[-1]
+                print(f"🔄 Nenhum adaptador final encontrado na raiz de '{args.adapter_path}'.")
+                print(f"👉 Usando automaticamente o checkpoint mais recente: '{adapter_path}'")
+            else:
+                print(f"⚠️  Aviso: Nenhum arquivo 'adapter_config.json' ou subpasta 'checkpoint-*' encontrado em '{adapter_path}'.")
+    
     # ===== PASSO 1: Carregar Tokenizer e Modelo Base =====
-    print(f"\n📥 Carregando tokenizer de: {args.adapter_path} (ou caindo de volta para o base)...")
+    print(f"\n📥 Carregando tokenizer de: {adapter_path} (ou caindo de volta para o base)...")
     try:
-        tokenizer = AutoTokenizer.from_pretrained(args.adapter_path, trust_remote_code=True)
+        tokenizer = AutoTokenizer.from_pretrained(adapter_path, trust_remote_code=True)
     except Exception:
         tokenizer = AutoTokenizer.from_pretrained(args.model_name, trust_remote_code=True)
         
@@ -79,15 +96,15 @@ def main():
     print(f"📥 Carregando modelo base {args.model_name}...")
     base_model = AutoModelForCausalLM.from_pretrained(
         args.model_name,
-        torch_dtype=dtype,
+        dtype=dtype,
         device_map="auto",
         trust_remote_code=True
     )
     
     # ===== PASSO 2: Carregar Adaptador LoRA =====
-    print(f"🔧 Mesclando o adaptador LoRA de: {args.adapter_path}...")
+    print(f"🔧 Mesclando o adaptador LoRA de: {adapter_path}...")
     try:
-        model = PeftModel.from_pretrained(base_model, args.adapter_path)
+        model = PeftModel.from_pretrained(base_model, adapter_path)
         print("✅ Adaptador LoRA carregado e aplicado com sucesso!")
     except Exception as e:
         print(f"❌ Erro ao carregar o adaptador LoRA: {e}")
@@ -103,7 +120,9 @@ def main():
             local_txt_path=args.local_txt,
             split_ratio=0.1,
             max_seq_length=2048,
-            seed=42
+            seed=42,
+            only_eval=True,
+            max_samples=args.max_samples
         )
         eval_dataset = dataset_split["test"]
     except Exception as e:
@@ -141,7 +160,7 @@ def main():
     # ===== PASSO 6: Salvar Resultados =====
     results = {
         "model_name": args.model_name,
-        "adapter_path": args.adapter_path,
+        "adapter_path": adapter_path,
         "metrics": metrics,
         "generations": generations
     }
@@ -150,7 +169,7 @@ def main():
         json.dump(results, f, indent=4, ensure_ascii=False)
         
     print("\n" + "=" * 80)
-    print(f"💾 Resultados do CPT salvos com sucesso em: {args.output_json}")
+    print(f"💾 Resultados do CPT salvos com sucesso em: {args.output_json} (adaptador usado: {adapter_path})")
     print("=" * 80)
     
     # Sugestão de comparação

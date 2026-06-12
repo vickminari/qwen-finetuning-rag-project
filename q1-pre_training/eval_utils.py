@@ -13,15 +13,26 @@ def load_and_prepare_dataset(
     split_ratio=0.1,
     max_seq_length=2048,
     seed=42,
-    local_txt_path=None
+    local_txt_path=None,
+    only_eval=False,
+    max_samples=None
 ):
     """
     Carrega o dataset e o prepara em blocos/chunks de max_seq_length tokens.
     Suporta carregamento direto do Hugging Face ou arquivo de texto local.
-    """
+    """ 
+    if hasattr(tokenizer, "tokenizer"):
+        tokenizer = tokenizer.tokenizer
+    all_splits = [
+        "carnaubais", "tabuleiros_alto_parnaiba", "planice_litoran", "entre_rios",
+        "vale_do_sambito", "vale_dos_rios_piaui_e_itaueiras", "cocais", "mangabeiras",
+        "serra_da_capivara", "vale_do_rio_guaribas", "chapada_vale_do_rio_itaim", "vale_do_caninde"
+    ]
     if territories is None:
         # Usamos carnaubais como padrão ou outro split pequeno disponível
         territories = ["carnaubais"]
+    elif len(territories) == 1 and territories[0].lower() == "all":
+        territories = all_splits
 
     raw_text = ""
     
@@ -47,7 +58,27 @@ def load_and_prepare_dataset(
             print("💡 Dica 2: Você pode passar o caminho de um arquivo local contendo textos usando o argumento '--local_txt'.")
             raise e
 
-    print(f"⚙️  Tokenizando dataset (tamanho bruto: {len(dataset)} registros)...")
+    dataset_to_process = dataset
+    is_split_before = False
+    
+    if only_eval and not (local_txt_path and os.path.exists(local_txt_path)) and len(dataset) > 10:
+        print(f"✂️  Modo de avaliação detectado. Otimizando carregamento...")
+        # Divide o dataset bruto em treino/validação primeiro para evitar processamento inútil
+        split_raw = dataset.train_test_split(test_size=split_ratio, seed=seed)
+        raw_eval = split_raw["test"]
+        
+        # Limita o número de documentos brutos para economizar tempo de tokenização
+        if max_samples is not None:
+            # Pegamos uma quantidade generosa de documentos para garantir que teremos pelo menos max_samples chunks.
+            # Geralmente cada documento tem bastante texto, então max_samples * 5 é extremamente seguro.
+            generous_limit = min(len(raw_eval), max_samples * 5)
+            raw_eval = raw_eval.select(range(generous_limit))
+            print(f"⚡ Selecionados apenas os primeiros {generous_limit} documentos do split de teste para tokenização ultra-rápida.")
+            
+        dataset_to_process = raw_eval
+        is_split_before = True
+
+    print(f"⚙️  Tokenizando dataset (tamanho bruto: {len(dataset_to_process)} registros)...")
     
     # Tokeniza todo o texto
     def tokenize_function(examples):
@@ -60,42 +91,41 @@ def load_and_prepare_dataset(
         concatenated_text = [t + tokenizer.eos_token for t in examples[text_column] if t]
         return tokenizer(concatenated_text, add_special_tokens=False)
 
-    tokenized_dataset = dataset.map(
+    tokenized_dataset = dataset_to_process.map(
         tokenize_function,
         batched=True,
-        remove_columns=dataset.column_names,
+        remove_columns=dataset_to_process.column_names,
         desc="Tokenizando textos"
     )
 
     # Concatena todos os IDs de token e agrupa em blocos de max_seq_length
-    print("🧱 Agrupando tokens em chunks de seq_len = 2048...")
-    all_input_ids = []
-    for item in tokenized_dataset:
-        all_input_ids.extend(item["input_ids"])
-
-    total_tokens = len(all_input_ids)
-    print(f"  -> Total de tokens tokenizados: {total_tokens:,}")
-
-    # Corta o excesso para caber em blocos exatos de max_seq_length
-    num_chunks = total_tokens // max_seq_length
-    if num_chunks == 0:
-        raise ValueError(
-            f"O dataset possui apenas {total_tokens} tokens, o que é menor que max_seq_length={max_seq_length}. "
-            "Forneça mais dados ou reduza o tamanho da sequência."
-        )
+    print(f"🧱 Agrupando tokens em chunks de seq_len = {max_seq_length}...")
     
-    input_ids_chunks = [
-        all_input_ids[i * max_seq_length : (i + 1) * max_seq_length]
-        for i in range(num_chunks)
-    ]
+    def group_texts(examples):
+        # Concatena todos os inputs no batch
+        concatenated_examples = {k: sum(examples[k], []) for k in examples.keys()}
+        total_length = len(concatenated_examples[list(examples.keys())[0]])
+        # Corta o excesso para caber em blocos exatos de max_seq_length
+        total_length = (total_length // max_seq_length) * max_seq_length
+        # Divide em chunks
+        result = {
+            k: [t[i : i + max_seq_length] for i in range(0, total_length, max_seq_length)]
+            for k, t in concatenated_examples.items()
+        }
+        result["labels"] = result["input_ids"].copy()
+        return result
 
-    # Cria o dataset final do Hugging Face a partir dos chunks
-    chunked_dataset = Dataset.from_dict({
-        "input_ids": input_ids_chunks,
-        "labels": input_ids_chunks # Causal LM usa a própria entrada como label
-    })
+    chunked_dataset = tokenized_dataset.map(
+        group_texts,
+        batched=True,
+        desc=f"Agrupando em blocos de {max_seq_length}"
+    )
     
-    # Divide em treino e validação
+    if is_split_before:
+        print(f"✅ Dataset de validação preparado: {len(chunked_dataset)} chunks.")
+        return {"test": chunked_dataset}
+        
+    # Divide em treino e validação (comportamento padrão)
     split_dataset = chunked_dataset.train_test_split(test_size=split_ratio, seed=seed)
     print(f"✅ Dataset preparado: {len(split_dataset['train'])} chunks de treino, {len(split_dataset['test'])} chunks de validação.")
     
@@ -109,6 +139,8 @@ def evaluate_model(model, tokenizer, eval_dataset, device, batch_size=1, max_sam
     - Perplexidade (PPL)
     - Acurácia de previsão de próximo token (top-1 e top-5)
     """
+    if hasattr(tokenizer, "tokenizer"):
+        tokenizer = tokenizer.tokenizer
     model.eval()
     total_loss = 0.0
     total_tokens = 0
@@ -192,6 +224,8 @@ def run_qualitative_generation(model, tokenizer, prompts, device, max_new_tokens
     """
     Gera texto para uma lista de prompts qualitativos e retorna os resultados.
     """
+    if hasattr(tokenizer, "tokenizer"):
+        tokenizer = tokenizer.tokenizer
     model.eval()
     results = {}
     print("\n✍️  Gerando saídas qualitativas...")

@@ -20,7 +20,7 @@ def load_model_and_tokenizer(model_name, adapter_path=None, device="cuda"):
     print(f"📥 Carregando modelo base: {model_name}...")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=dtype,
+        dtype=dtype,
         device_map="auto",
         trust_remote_code=True
     )
@@ -117,6 +117,23 @@ def main():
         
     print(f"📋 Carregadas {len(benchmark)} perguntas do benchmark.")
     
+    # ===== PASSO 0: Resolver caminho do adaptador (final ou checkpoint) =====
+    adapter_path = args.adapter_path
+    if os.path.exists(adapter_path):
+        if not os.path.exists(os.path.join(adapter_path, "adapter_config.json")):
+            checkpoints = [
+                os.path.join(adapter_path, d)
+                for d in os.listdir(adapter_path)
+                if d.startswith("checkpoint-") and os.path.isdir(os.path.join(adapter_path, d))
+            ]
+            if checkpoints:
+                checkpoints.sort(key=lambda x: int(x.split("-")[-1]))
+                adapter_path = checkpoints[-1]
+                print(f"🔄 Nenhum adaptador final encontrado na raiz de '{args.adapter_path}'.")
+                print(f"👉 Usando automaticamente o checkpoint mais recente: '{adapter_path}'")
+            else:
+                print(f"⚠️  Aviso: Nenhum arquivo 'adapter_config.json' ou subpasta 'checkpoint-*' encontrado em '{adapter_path}'.")
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # ===== PASSO 1: Rodar Inferências no Modelo Baseline =====
@@ -139,10 +156,10 @@ def main():
 
     # ===== PASSO 2: Rodar Inferências no Modelo CPT =====
     cpt_answers = []
-    if os.path.exists(args.adapter_path):
+    if os.path.exists(adapter_path):
         print("\n⏱️  Rodando inferências no MODELO CPT (com adaptador LoRA)...")
         try:
-            model, tokenizer = load_model_and_tokenizer(args.model_name, adapter_path=args.adapter_path, device=device)
+            model, tokenizer = load_model_and_tokenizer(args.model_name, adapter_path=adapter_path, device=device)
             for item in tqdm(benchmark, desc="Modelo CPT"):
                 prompt = f"Pergunta: {item['question']}\nResposta:"
                 ans = run_inference(model, tokenizer, prompt, device, args.max_new_tokens)
@@ -154,7 +171,7 @@ def main():
             print(f"❌ Erro ao carregar/rodar inferências no modelo CPT: {e}")
             cpt_answers = ["Erro ao carregar modelo CPT"] * len(benchmark)
     else:
-        print(f"\n⚠️  Diretório do adaptador CPT '{args.adapter_path}' não encontrado.")
+        print(f"\n⚠️  Diretório do adaptador CPT '{adapter_path}' não encontrado.")
         print("As respostas do modelo CPT serão preenchidas com marcadores vazios.")
         cpt_answers = ["(Treinamento CPT ainda não foi realizado)"] * len(benchmark)
 
@@ -165,7 +182,7 @@ def main():
     report_md.append(f"# Relatório de Comparação de Benchmark Q&A — Q1")
     report_md.append(f"Este relatório compara as respostas geradas pelo modelo base original vs o modelo após pré-treino continuado (CPT).\n")
     report_md.append(f"- **Modelo Base:** `{args.model_name}`")
-    report_md.append(f"- **Adaptador CPT:** `{args.adapter_path}`")
+    report_md.append(f"- **Adaptador CPT:** `{adapter_path}`")
     report_md.append(f"- **Total de Questões:** {len(benchmark)}\n")
     report_md.append(f"--- \n")
     
