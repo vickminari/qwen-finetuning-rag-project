@@ -1,6 +1,14 @@
 import os
 import argparse
 import torch
+
+# Tenta importar o Unsloth para aceleração (DEVE ser importado antes de transformers e peft)
+try:
+    from unsloth import FastLanguageModel
+    UNSLOTH_AVAILABLE = True
+except ImportError:
+    UNSLOTH_AVAILABLE = False
+
 from transformers import (
     TrainingArguments,
     Trainer,
@@ -10,12 +18,7 @@ from transformers import (
 )
 from eval_utils import load_and_prepare_dataset
 
-# Tenta importar o Unsloth para aceleração
-try:
-    from unsloth import FastLanguageModel
-    UNSLOTH_AVAILABLE = True
-except ImportError:
-    UNSLOTH_AVAILABLE = False
+if not UNSLOTH_AVAILABLE:
     from peft import LoraConfig, get_peft_model, TaskType
 
 def main():
@@ -76,9 +79,56 @@ def main():
         help="Número máximo de passos de treino (-1 desativa e treina por épocas)."
     )
     parser.add_argument(
+        "--eval_steps",
+        type=int,
+        default=500,
+        help="Número de passos entre avaliações."
+    )
+    parser.add_argument(
+        "--save_steps",
+        type=int,
+        default=500,
+        help="Número de passos entre salvamentos."
+    )
+    parser.add_argument(
+        "--max_eval_samples",
+        type=int,
+        default=500,
+        help="Número máximo de chunks usados na avaliação durante o treino (0 = todos). "
+             "Limitar a ~500 acelera muito a eval sem perder representatividade."
+    )
+    parser.add_argument(
         "--force_standard",
         action="store_true",
         help="Força o uso do Transformers + PEFT padrão ao invés do Unsloth."
+    )
+    parser.add_argument(
+        "--lora_r",
+        type=int,
+        default=64,
+        help="Rank do LoRA (r)."
+    )
+    parser.add_argument(
+        "--lora_alpha",
+        type=int,
+        default=16,
+        help="Alpha do LoRA (lora_alpha)."
+    )
+    parser.add_argument(
+        "--no_resume",
+        action="store_true",
+        help="Desativa a retomada automática do treinamento a partir de checkpoints existentes."
+    )
+    parser.add_argument(
+        "--train_embeddings",
+        action="store_true",
+        help="Treina também as camadas de embedding e lm_head (consome muito mais VRAM)."
+    )
+    parser.add_argument(
+        "--max_seq_length",
+        type=int,
+        default=2048,
+        help="Comprimento máximo de sequência (max_seq_length)."
     )
     
     args = parser.parse_args()
@@ -105,23 +155,28 @@ def main():
         print(f"\n📥 Carregando {args.model_name} via Unsloth...")
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name=args.model_name,
-            max_seq_length=2048,
+            max_seq_length=args.max_seq_length,
             dtype=dtype,
             load_in_4bit=False,  # CPT no Qwen3.5 não recomenda QLoRA 4-bit
             trust_remote_code=True,
         )
+        if hasattr(tokenizer, "tokenizer"):
+            tokenizer = tokenizer.tokenizer
         
         # Aplicar PEFT usando Unsloth
-        print("🔧 Configurando rsLoRA de rank 256 via Unsloth...")
+        print(f"🔧 Configurando rsLoRA de rank {args.lora_r} via Unsloth...")
+        target_modules = [
+            "q_proj", "k_proj", "v_proj", "o_proj",
+            "gate_proj", "up_proj", "down_proj"
+        ]
+        if args.train_embeddings:
+            target_modules.extend(["embed_tokens", "lm_head"])
+            
         model = FastLanguageModel.get_peft_model(
             model,
-            r=256,
-            target_modules=[
-                "q_proj", "k_proj", "v_proj", "o_proj",
-                "gate_proj", "up_proj", "down_proj",
-                "embed_tokens", "lm_head"
-            ],
-            lora_alpha=16,
+            r=args.lora_r,
+            target_modules=target_modules,
+            lora_alpha=args.lora_alpha,
             lora_dropout=0,
             bias="none",
             use_gradient_checkpointing="unsloth",  # Otimizado para 8GB
@@ -136,7 +191,7 @@ def main():
             
         model = AutoModelForCausalLM.from_pretrained(
             args.model_name,
-            torch_dtype=dtype,
+            dtype=dtype,
             device_map="auto",
             trust_remote_code=True
         )
@@ -145,15 +200,18 @@ def main():
         model.gradient_checkpointing_enable()
         
         # Configurar rsLoRA padrão com PEFT
-        print("🔧 Configurando rsLoRA de rank 256 via PEFT padrão...")
+        print(f"🔧 Configurando rsLoRA de rank {args.lora_r} via PEFT padrão...")
+        target_modules = [
+            "q_proj", "k_proj", "v_proj", "o_proj",
+            "gate_proj", "up_proj", "down_proj"
+        ]
+        if args.train_embeddings:
+            target_modules.extend(["embed_tokens", "lm_head"])
+            
         peft_config = LoraConfig(
-            r=256,
-            lora_alpha=16,
-            target_modules=[
-                "q_proj", "k_proj", "v_proj", "o_proj",
-                "gate_proj", "up_proj", "down_proj",
-                "embed_tokens", "lm_head"
-            ],
+            r=args.lora_r,
+            lora_alpha=args.lora_alpha,
+            target_modules=target_modules,
             lora_dropout=0.05,
             bias="none",
             task_type=TaskType.CAUSAL_LM,
@@ -171,17 +229,27 @@ def main():
             territories=args.territories,
             local_txt_path=args.local_txt,
             split_ratio=0.1,
-            max_seq_length=2048,
+            max_seq_length=args.max_seq_length,
             seed=42
         )
         train_dataset = dataset_split["train"]
         eval_dataset = dataset_split["test"]
+        
+        # Limita o dataset de validação durante o treino para evitar eval lenta
+        if args.max_eval_samples > 0 and len(eval_dataset) > args.max_eval_samples:
+            print(f"✂️  Limitando eval de {len(eval_dataset)} → {args.max_eval_samples} chunks (treino mais rápido).")
+            eval_dataset = eval_dataset.select(range(args.max_eval_samples))
     except Exception as e:
         print(f"❌ Erro na preparação dos dados: {e}")
         return
         
     # ===== PASSO 3: Configurar Argumentos de Treino =====
     print("\n⚙️  Configurando hiperparâmetros de treinamento...")
+    
+    # Calcula warmup_steps dinamicamente para evitar deprecation warning em transformers v5
+    total_steps = args.max_steps if args.max_steps > 0 else (len(train_dataset) * args.epochs) // (args.batch_size * args.grad_accum)
+    warmup_steps = max(1, int(0.03 * total_steps))
+    
     training_args = TrainingArguments(
         output_dir=args.output_dir,
         num_train_epochs=args.epochs,
@@ -190,13 +258,13 @@ def main():
         gradient_accumulation_steps=args.grad_accum,
         learning_rate=args.learning_rate,
         weight_decay=0.01,
-        warmup_ratio=0.03,
+        warmup_steps=warmup_steps,
         lr_scheduler_type="cosine",
         logging_steps=5,
         save_strategy="steps",
-        save_steps=100,
+        save_steps=args.save_steps,
         eval_strategy="steps",
-        eval_steps=100,
+        eval_steps=args.eval_steps,
         fp16=False,
         bf16=(dtype == torch.bfloat16),
         optim="adamw_8bit",  # Economiza ~30% de VRAM do otimizador
@@ -216,7 +284,20 @@ def main():
     
     # ===== PASSO 5: Executar Treinamento =====
     print("\n🎬 Iniciando loop de treinamento...")
-    trainer.train()
+    
+    resume_from_checkpoint = None
+    if not args.no_resume and os.path.exists(args.output_dir):
+        checkpoints = [
+            os.path.join(args.output_dir, d)
+            for d in os.listdir(args.output_dir)
+            if d.startswith("checkpoint-") and os.path.isdir(os.path.join(args.output_dir, d))
+        ]
+        if checkpoints:
+            checkpoints.sort(key=lambda x: int(x.split("-")[-1]))
+            resume_from_checkpoint = checkpoints[-1]
+            print(f"🔄 Checkpoint detectado: {resume_from_checkpoint}. Retomando o treinamento...")
+            
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
     
     # ===== PASSO 6: Salvar Pesos LoRA e Tokenizer =====
     print(f"\n💾 Salvando pesos do adaptador LoRA e Tokenizer em: {args.output_dir}")
