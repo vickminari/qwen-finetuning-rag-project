@@ -1,0 +1,33 @@
+# ==============================================================================
+# Dependências do Trabalho Final de Tópicos em IA (Q1 - Q6)
+# Qwen-Finetuning-RAG-Project
+# ==============================================================================
+
+# 1. Core / Treinamento & PEFT (Q1, Q2, Q3, Q4)
+# Nota: Instale o PyTorch compatível com sua versão de CUDA primeiro.
+# Exemplo: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+unsloth
+torch>=2.6.0
+transformers>=5.5.0
+peft>=0.12.0
+trl>=0.10.0
+datasets>=3.0.0
+accelerate>=0.34.0
+bitsandbytes>=0.43.0
+tqdm>=4.66.0
+packaging
+triton; sys_platform == 'linux'  # Triton é exigido pelo Unsloth/FLA no Linux (WSL)
+
+# 2. Flash Linear Attention (necessário para as camadas lineares do Qwen 3.5)
+# Caso não esteja instalado, instale via: pip install fla
+# ou via github: pip install git+https://github.com/sustech-recom/flash-linear-attention.git
+
+# 3. Retrieval-Augmented Generation - RAG (Q5)
+# langchain>=0.2.0
+# langchain-community>=0.2.0
+# chromadb>=0.5.0
+# faiss-cpu>=1.8.0
+# sentence-transformers>=3.0.0  # Para geração de embeddings locais para o RAG
+
+# 4. Guardrails & Segurança (Q6)
+# guardrails-ai>=0.4.0
