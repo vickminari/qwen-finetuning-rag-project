@@ -149,13 +149,21 @@ def main():
     )
     
     # ===== PASSO 5: Rodar Avaliação Qualitativa =====
-    # Mesmos prompts para comparação justa
-    prompts_teste = [
-        "DECRETO Nº 012/2025\nEmenta: Abre crédito adicional suplementar no valor de ",
-        "PORTARIA Nº 003/2025\nO PREFEITO MUNICIPAL DE CAMPO MAIOR, no uso de suas atribuições legais, resolve: ",
-        "AVISO DE LICITAÇÃO. O Município de Carnaubais, torna público que realizará licitação na modalidade ",
-        "Art. 1º. Fica nomeado para o cargo em comissão de Secretário Municipal de "
-    ]
+    # Define os prompts de acordo com o dataset selecionado
+    if "teresina" in args.dataset_name.lower():
+        prompts_teste = [
+            "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ",
+            "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ",
+            "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ",
+            "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. "
+        ]
+    else:
+        prompts_teste = [
+            "DECRETO Nº 012/2025\nEmenta: Abre crédito adicional suplementar no valor de ",
+            "PORTARIA Nº 003/2025\nO PREFEITO MUNICIPAL DE CAMPO MAIOR, no uso de suas atribuições legais, resolve: ",
+            "AVISO DE LICITAÇÃO. O Município de Carnaubais, torna público que realizará licitação na modalidade ",
+            "Art. 1º. Fica nomeado para o cargo em comissão de Secretário Municipal de "
+        ]
     
     generations = run_qualitative_generation(
         model=model,

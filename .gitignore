@@ -3,3 +3,4 @@ __pycache__
 unsloth*
 q1_cpt_model/
 *.json
+models/
