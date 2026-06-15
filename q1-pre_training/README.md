@@ -33,11 +33,12 @@ pip install -r requirements.txt
 Para mensurar o impacto do CPT, primeiro avaliamos o desempenho do modelo em sua versão original de fábrica nos diários municipais:
 
 ```bash
-python evaluate_baseline.py --model_name "Qwen/Qwen3.5-2B-Base" --territories "carnaubais" --max_samples 50
+python evaluate_baseline.py --model_name "Qwen/Qwen3.5-2B-Base" --dataset_name "gutoportelaa/dom-pi-teresina-2025" --max_samples 50
 ```
 
 *   `--model_name`: Identificador ou caminho local do modelo Hugging Face.
-*   `--territories`: Splits/territórios a serem baixados do dataset `gutoportelaa/DOMPI-2025`.
+*   `--dataset_name`: *(Opcional)* O dataset do Hugging Face para carregar. Padrão: `"gutoportelaa/DOMPI-2025"`. Pode ser alterado para `"gutoportelaa/dom-pi-teresina-2025"` para uma amostra menor e de alta qualidade específica de Teresina.
+*   `--territories`: Splits/territórios a serem baixados do dataset `gutoportelaa/DOMPI-2025` (ignorado se usar o dataset de Teresina).
 *   `--local_txt`: *(Opcional)* Se você possuir os diários em texto unificados localmente, forneça o caminho do arquivo `.txt` (ex: `--local_txt "caminho/para/diarios.txt"`), evitando o download automático do Hugging Face.
 *   `--max_samples`: Limita a quantidade de blocos (de 2048 tokens) para fins de velocidade na avaliação.
 
@@ -50,9 +51,14 @@ Isso salvará as métricas quantitativas e algumas gerações qualitativas no ar
 Execute o script de treinamento para ajustar o modelo nos diários oficiais. Ele já vem configurado com os parâmetros recomendados no planejamento (como `optim="adamw_8bit"`, `bf16=True`, `gradient_accumulation_steps=8` e `use_rslora=True`):
 
 ```bash
+# Treino padrão com DOMPI-2025 usando territórios específicos
 python cpt_training.py --model_name "Qwen/Qwen3.5-2B-Base" --territories "carnaubais" --epochs 1 --output_dir "./q1_cpt_model"
+
+# OU treino com o dataset de Teresina (amostra menor, mais limpa e de melhor qualidade)
+python cpt_training.py --model_name "Qwen/Qwen3.5-2B-Base" --dataset_name "gutoportelaa/dom-pi-teresina-2025" --epochs 1 --output_dir "./q1_cpt_model"
 ```
 
+*   `--dataset_name`: O dataset do Hugging Face. Padrão: `"gutoportelaa/DOMPI-2025"`. Pode ser alterado para `"gutoportelaa/dom-pi-teresina-2025"`.
 *   `--output_dir`: O local onde o modelo adaptado (pesos LoRA) e o tokenizer modificado serão salvos.
 *   `--local_txt`: Permite treinar a partir de um arquivo `.txt` local.
 

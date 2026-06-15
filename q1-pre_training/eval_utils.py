@@ -44,19 +44,27 @@ def load_and_prepare_dataset(
         dataset = Dataset.from_dict({"texto": [raw_text]})
     else:
         # Caso 2: Carregamento a partir do Hugging Face
-        print(f"📥 Carregando dataset {dataset_name} do Hugging Face para os territórios: {territories}")
-        try:
-            ds_list = []
-            for t in territories:
-                print(f"  -> Baixando split/território: {t}")
-                ds = load_dataset(dataset_name, name="raw", split=t)
-                ds_list.append(ds)
-            dataset = concatenate_datasets(ds_list)
-        except Exception as e:
-            print(f"❌ Erro ao carregar dataset do Hugging Face: {e}")
-            print("💡 Dica: Verifique sua conexão com a internet ou se o nome do território está correto.")
-            print("💡 Dica 2: Você pode passar o caminho de um arquivo local contendo textos usando o argumento '--local_txt'.")
-            raise e
+        if "teresina" in dataset_name.lower():
+            print(f"📥 Carregando dataset de Teresina {dataset_name} do Hugging Face...")
+            try:
+                dataset = load_dataset(dataset_name, split="train")
+            except Exception as e:
+                print(f"❌ Erro ao carregar dataset de Teresina do Hugging Face: {e}")
+                raise e
+        else:
+            print(f"📥 Carregando dataset {dataset_name} do Hugging Face para os territórios: {territories}")
+            try:
+                ds_list = []
+                for t in territories:
+                    print(f"  -> Baixando split/território: {t}")
+                    ds = load_dataset(dataset_name, name="raw", split=t)
+                    ds_list.append(ds)
+                dataset = concatenate_datasets(ds_list)
+            except Exception as e:
+                print(f"❌ Erro ao carregar dataset do Hugging Face: {e}")
+                print("💡 Dica: Verifique sua conexão com a internet ou se o nome do território está correto.")
+                print("💡 Dica 2: Você pode passar o caminho de um arquivo local contendo textos usando o argumento '--local_txt'.")
+                raise e
 
     dataset_to_process = dataset
     is_split_before = False

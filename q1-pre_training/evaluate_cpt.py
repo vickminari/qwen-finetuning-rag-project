@@ -15,6 +15,12 @@ def main():
         help="Nome ou caminho do modelo base Hugging Face original."
     )
     parser.add_argument(
+        "--dataset_name",
+        type=str,
+        default="gutoportelaa/DOMPI-2025",
+        help="Nome do dataset do Hugging Face. Por exemplo, 'gutoportelaa/DOMPI-2025' ou 'gutoportelaa/dom-pi-teresina-2025'."
+    )
+    parser.add_argument(
         "--adapter_path",
         type=str,
         default="./q1_cpt_model",
@@ -58,6 +64,7 @@ def main():
     print("📊 INICIANDO AVALIAÇÃO DO MODELO COM CPT (Q1 - DEPOIS DO PRÉ-TREINO)")
     print("=" * 80)
     print(f"Modelo Base: {args.model_name}")
+    print(f"Dataset: {args.dataset_name}")
     print(f"Adaptador LoRA: {args.adapter_path}")
     print(f"Dispositivo: {'GPU (CUDA)' if torch.cuda.is_available() else 'CPU'}")
     
@@ -116,6 +123,7 @@ def main():
     try:
         dataset_split = load_and_prepare_dataset(
             tokenizer=tokenizer,
+            dataset_name=args.dataset_name,
             territories=args.territories,
             local_txt_path=args.local_txt,
             split_ratio=0.1,

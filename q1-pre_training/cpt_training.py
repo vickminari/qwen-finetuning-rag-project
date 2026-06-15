@@ -30,6 +30,12 @@ def main():
         help="Nome ou caminho do modelo base Hugging Face a ser treinado."
     )
     parser.add_argument(
+        "--dataset_name",
+        type=str,
+        default="gutoportelaa/DOMPI-2025",
+        help="Nome do dataset do Hugging Face. Por exemplo, 'gutoportelaa/DOMPI-2025' ou 'gutoportelaa/dom-pi-teresina-2025'."
+    )
+    parser.add_argument(
         "--territories",
         type=str,
         nargs="+",
@@ -226,6 +232,7 @@ def main():
     try:
         dataset_split = load_and_prepare_dataset(
             tokenizer=tokenizer,
+            dataset_name=args.dataset_name,
             territories=args.territories,
             local_txt_path=args.local_txt,
             split_ratio=0.1,
