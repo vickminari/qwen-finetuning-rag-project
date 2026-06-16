@@ -42,8 +42,8 @@ def main():
     parser.add_argument(
         "--max_samples",
         type=int,
-        default=50,
-        help="Número máximo de chunks para avaliar (deve ser o mesmo do baseline para comparação justa)."
+        default=None,
+        help="Número máximo de chunks para avaliar (deixe None para avaliar todo o dataset)."
     )
     parser.add_argument(
         "--batch_size",
@@ -51,10 +51,16 @@ def main():
         default=1,
         help="Tamanho do lote para avaliação."
     )
+    # Determina o caminho absoluto da pasta reports na raiz do projeto
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    default_reports_dir = os.path.join(project_root, "reports")
+    default_output_json = os.path.join(default_reports_dir, "cpt_evaluation.json")
+
     parser.add_argument(
         "--output_json",
         type=str,
-        default="cpt_evaluation.json",
+        default=default_output_json,
         help="Arquivo JSON para salvar os resultados da avaliação."
     )
     
@@ -181,6 +187,8 @@ def main():
         "generations": generations
     }
     
+    # Garante que a pasta de destino exista
+    os.makedirs(os.path.dirname(args.output_json), exist_ok=True)
     with open(args.output_json, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         
@@ -189,7 +197,13 @@ def main():
     print("=" * 80)
     
     # Sugestão de comparação
-    baseline_json = "baseline_evaluation.json"
+    baseline_json = os.path.join(default_reports_dir, "baseline_evaluation.json")
+    if not os.path.exists(baseline_json):
+        if os.path.exists("reports/baseline_evaluation.json"):
+            baseline_json = "reports/baseline_evaluation.json"
+        elif os.path.exists("baseline_evaluation.json"):
+            baseline_json = "baseline_evaluation.json"
+        
     if os.path.exists(baseline_json):
         try:
             with open(baseline_json, "r", encoding="utf-8") as f:
