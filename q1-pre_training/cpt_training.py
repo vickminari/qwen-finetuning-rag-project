@@ -111,13 +111,13 @@ def main():
     parser.add_argument(
         "--lora_r",
         type=int,
-        default=64,
+        default=64, #256
         help="Rank do LoRA (r)."
     )
     parser.add_argument(
         "--lora_alpha",
         type=int,
-        default=16,
+        default=16, #64
         help="Alpha do LoRA (lora_alpha)."
     )
     parser.add_argument(
