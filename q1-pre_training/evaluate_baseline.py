@@ -35,8 +35,8 @@ def main():
     parser.add_argument(
         "--max_samples",
         type=int,
-        default=50,
-        help="Número máximo de chunks (2048 tokens cada) para avaliar (limitar para velocidade)."
+        default=None,
+        help="Número máximo de chunks (2048 tokens cada) para avaliar (deixe None para avaliar todo o dataset)."
     )
     parser.add_argument(
         "--batch_size",
@@ -44,10 +44,16 @@ def main():
         default=1,
         help="Tamanho do lote para avaliação."
     )
+    # Determina o caminho absoluto da pasta reports na raiz do projeto
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    default_reports_dir = os.path.join(project_root, "reports")
+    default_output_json = os.path.join(default_reports_dir, "baseline_evaluation.json")
+
     parser.add_argument(
         "--output_json",
         type=str,
-        default="baseline_evaluation.json",
+        default=default_output_json,
         help="Arquivo JSON para salvar os resultados."
     )
     
@@ -143,6 +149,8 @@ def main():
         "generations": generations
     }
     
+    # Garante que a pasta de destino exista
+    os.makedirs(os.path.dirname(args.output_json), exist_ok=True)
     with open(args.output_json, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         
