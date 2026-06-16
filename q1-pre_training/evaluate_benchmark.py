@@ -71,10 +71,16 @@ def main():
         default="benchmark_q1.json",
         help="Caminho para o arquivo JSON contendo as perguntas do benchmark."
     )
+    # Determina o caminho absoluto da pasta reports na raiz do projeto
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    default_reports_dir = os.path.join(project_root, "reports")
+    default_output_report = os.path.join(default_reports_dir, "benchmark_comparison_report.md")
+
     parser.add_argument(
         "--output_report",
         type=str,
-        default="benchmark_comparison_report.md",
+        default=default_output_report,
         help="Caminho do arquivo Markdown para salvar a comparação detalhada."
     )
     parser.add_argument(
@@ -142,8 +148,11 @@ def main():
     try:
         model, tokenizer = load_model_and_tokenizer(args.model_name, device=device)
         for item in tqdm(benchmark, desc="Baseline"):
-            # Como é um modelo base (não-instruct), usamos um prompt estruturado simples
-            prompt = f"Pergunta: {item['question']}\nResposta:"
+            # Suporta chaves em inglês ou português
+            q_text = item.get("question", item.get("pergunta"))
+            if not q_text:
+                raise KeyError("O item do benchmark não possui a chave 'question' ou 'pergunta'.")
+            prompt = f"Pergunta: {q_text}\nResposta:"
             ans = run_inference(model, tokenizer, prompt, device, args.max_new_tokens)
             baseline_answers.append(ans)
             
@@ -161,7 +170,8 @@ def main():
         try:
             model, tokenizer = load_model_and_tokenizer(args.model_name, adapter_path=adapter_path, device=device)
             for item in tqdm(benchmark, desc="Modelo CPT"):
-                prompt = f"Pergunta: {item['question']}\nResposta:"
+                q_text = item.get("question", item.get("pergunta"))
+                prompt = f"Pergunta: {q_text}\nResposta:"
                 ans = run_inference(model, tokenizer, prompt, device, args.max_new_tokens)
                 cpt_answers.append(ans)
                 
@@ -188,8 +198,8 @@ def main():
     
     for i, item in enumerate(benchmark):
         q_id = item.get("id", i + 1)
-        question = item["question"]
-        ref = item["reference"]
+        question = item.get("question", item.get("pergunta"))
+        ref = item.get("reference", item.get("resposta", item.get("answer")))
         base_ans = baseline_answers[i]
         cpt_ans = cpt_answers[i]
         
@@ -206,6 +216,8 @@ def main():
         report_md.append(f"\n")
         report_md.append(f"--- \n")
         
+    # Garante que a pasta de destino exista
+    os.makedirs(os.path.dirname(args.output_report), exist_ok=True)
     with open(args.output_report, "w", encoding="utf-8") as f:
         f.write("\n".join(report_md))
         
