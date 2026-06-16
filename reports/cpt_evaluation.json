@@ -1,0 +1,17 @@
+{
+    "model_name": "Qwen/Qwen3.5-2B-Base",
+    "adapter_path": "./q1_cpt_model",
+    "metrics": {
+        "cross_entropy_loss": 0.8160217009504516,
+        "perplexity": 2.2614850997924805,
+        "top_1_accuracy": 0.8057154054852216,
+        "top_5_accuracy": 0.9132026381908392,
+        "evaluated_tokens": 1086957
+    },
+    "generations": {
+        "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ": "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: 1. Exonerar, do cargo efetivo de Auxiliar de Saúde, especialidade Técnico em Enfermagem, referência 'C3', matrícula n° 83705, do Sistema de Saúde do Município de Teresina, com efeitos a partir de 01.01.2025. 2. A referida exoneração decorre do não exercício do",
+        "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ": "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: 1. Nomear, para exercer a função de cargo de provimento comissionado estrutura gabinete de vereador da Câmara Municipal de Teresina: LILIANE SOARES VIEIRA - Assessor Administrativo Gabinete V. 2. A presente Portaria entra em vigor na data de sua publicação, retroagindo seus efeitos a 01 de agosto de 2025. Gabinete do",
+        "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ": "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade 2 (uma única oferta) para contratação de empresa especializada na prestação de serviços de locação de mão de obra, com a finalidade de atender às necessidades da Administração Pública Municipal, com a empresa empresa: CONCORRÊNCIA PÚBLICA. Processo Eletrônico nº 00050.001075/2025-38. Pregão Eletrônico nº 0",
+        "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. ": "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. 011.255.***-**, matrícula nº 103270, lotado na Secretaria Municipal de Meio Ambiente e Recursos Hídricos - SEMAM. Art. 2º. O presente Decreto entra em vigor na data de sua publicação, retroagindo seus efeitos a 01 de outubro de 2024. Gabinete da Presidência da Câmara"
+    }
+}
