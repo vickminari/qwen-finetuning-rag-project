@@ -3,5 +3,6 @@ __pycache__
 unsloth*
 q1_cpt_model/
 q2_sft_model/
+q3_rslora_model/
 models/
 docs/
