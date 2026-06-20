@@ -1,0 +1,10 @@
+{
+    "baseline_metrics": {
+        "cross_entropy_loss": 1.9225070713419836,
+        "perplexity": 6.838080406188965
+    },
+    "sft_metrics": {
+        "cross_entropy_loss": 1.452408746015355,
+        "perplexity": 4.273396015167236
+    }
+}
