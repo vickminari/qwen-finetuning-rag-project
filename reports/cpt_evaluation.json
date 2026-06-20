@@ -2,16 +2,16 @@
     "model_name": "Qwen/Qwen3.5-2B-Base",
     "adapter_path": "./q1_cpt_model",
     "metrics": {
-        "cross_entropy_loss": 0.8160217009504516,
-        "perplexity": 2.2614850997924805,
-        "top_1_accuracy": 0.8057154054852216,
-        "top_5_accuracy": 0.9132026381908392,
+        "cross_entropy_loss": 0.9011294835030272,
+        "perplexity": 2.4623827934265137,
+        "top_1_accuracy": 0.7858572142228257,
+        "top_5_accuracy": 0.9044074420607255,
         "evaluated_tokens": 1086957
     },
     "generations": {
-        "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ": "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: 1. Exonerar, do cargo efetivo de Auxiliar de Saúde, especialidade Técnico em Enfermagem, referência 'C3', matrícula n° 83705, do Sistema de Saúde do Município de Teresina, com efeitos a partir de 01.01.2025. 2. A referida exoneração decorre do não exercício do",
-        "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ": "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: 1. Nomear, para exercer a função de cargo de provimento comissionado estrutura gabinete de vereador da Câmara Municipal de Teresina: LILIANE SOARES VIEIRA - Assessor Administrativo Gabinete V. 2. A presente Portaria entra em vigor na data de sua publicação, retroagindo seus efeitos a 01 de agosto de 2025. Gabinete do",
-        "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ": "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade 2 (uma única oferta) para contratação de empresa especializada na prestação de serviços de locação de mão de obra, com a finalidade de atender às necessidades da Administração Pública Municipal, com a empresa empresa: CONCORRÊNCIA PÚBLICA. Processo Eletrônico nº 00050.001075/2025-38. Pregão Eletrônico nº 0",
-        "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. ": "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. 011.255.***-**, matrícula nº 103270, lotado na Secretaria Municipal de Meio Ambiente e Recursos Hídricos - SEMAM. Art. 2º. O presente Decreto entra em vigor na data de sua publicação, retroagindo seus efeitos a 01 de outubro de 2024. Gabinete da Presidência da Câmara"
+        "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ": "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: 1. DISPEN -SAR a contratação de empresa especializada na prestação de serviços de limpeza de ruas e praças, com a empresa LIMPEZA URBANA LTDA, inscrita no CNPJ sob o nº 11.509.112/0001-26, com base no art. 73, inciso II, da Lei Federal nº",
+        "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ": "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: 1. CONVOCAR os servidores abaixo relacionados, para exercício de suas funções, conforme dispostos na Lei nº 1.078 de 06 de julho de 1950, na Lei Complementar nº 2.959 de 26 de dezembro de 2000, na Portaria nº 01/2025, de ",
+        "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ": "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade 22/23, com a empresa BIANCA CARVALHO COSTA LTDA, CNPJ nº 11.425.773/0001-21, para a contratação de empresa especializada na prestação de serviços de lavagem de veículos, com a empresa BIANCA CARVALHO COSTA LTDA, CNPJ nº 11.",
+        "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. ": "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. 1º CICERO CARVALHO FERNANDES, matrícula nº 022287, lotado na Secretaria Municipal de Educação - SEMEC. Art. 2º. Esta Portaria entra em vigor na data de sua publicação. Art. 3º. Revogam-se as disposições em contrário. Gabinete do Prefeito Municipal de Teresina, em 21 de"
     }
 }

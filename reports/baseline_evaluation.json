@@ -1,16 +1,16 @@
 {
     "model_name": "Qwen/Qwen3.5-2B-Base",
     "metrics": {
-        "cross_entropy_loss": 1.704033694228924,
-        "perplexity": 5.496072292327881,
-        "top_1_accuracy": 0.6320071233754634,
-        "top_5_accuracy": 0.8058475030432725,
-        "evaluated_tokens": 1086002
+        "cross_entropy_loss": 1.7991100679673366,
+        "perplexity": 6.044266223907471,
+        "top_1_accuracy": 0.6138868514987043,
+        "top_5_accuracy": 0.7973302039020097,
+        "evaluated_tokens": 102255
     },
     "generations": {
-        "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ": "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: 1) Aprovar o Regulamento da Câmara Municipal de Teresina, com as seguintes alterações e adições: 2) Aprovar as regras de funcionamento da Câmara Municipal de Teresina. 3) Aprovar o Regulamento do Conselho Municipal de Teresina, com as seguintes alterações e adições: 4) Aprovar o Regulamento do Conselho de Administração do Governo Municipal de Teresina",
-        "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ": "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: 1. Aprovar o Plano de Gestão da Recompensa de 2025, aprovado pela Portaria 012/2025; 2. Aprovar a Instrução Normativa 02/2025, que estabelece as regras para a avaliação dos resultados da Gestão da Recompensa, aprovado pela Portaria 012/2025;",
-        "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ": "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade 2ª. (Competitiva) para a contratação de serviços de limpeza e manutenção de áreas verdes e de áreas internas e externas do Centro de Convenções, da Secretaria Municipal de Obras e Infraestrutura (SMOI). O edital tem validade de 30 (trinta) dias a partir da data de publicação, podendo ser alterado mediante o disposto na Lei 10.520",
-        "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. ": "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. 4.º.\nArt. 2º. O Sr. 4.º. tem como cargo em comissão Assessor Técnico da Prefeitura de Teresina.\nArt. 3º. O Sr. 4.º. tem como cargo em comissão o título de Assessor Técnico da Prefeitura de Teresina.\nArt. 4º. A remuneração do Sr."
+        "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: ": "DECRETO Nº 045/2025\nO PREFEITO MUNICIPAL DE TERESINA, Estado do Piauí, no uso de suas atribuições, resolve: 1. Estabelecer a data de 10 de fevereiro de 2025 como a data para a realização da 1ª Reunião Ordinária da Câmara Municipal de Teresina, no dia 25 de fevereiro de 2025, às 10h30, no Auditório Municipal. 2. Estabelecer a data de",
+        "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: ": "PORTARIA Nº 012/2025\nO Secretário Municipal de Administração e Recursos Humanos de Teresina, resolve: 1. Aprovar a Portaria 007/2025, que dispõe sobre a Política de Segurança e Saúde no Trabalho, com a finalidade de assegurar a segurança e saúde dos trabalhadores, prevenindo acidentes e doenças ocupacionais, promovendo um ambiente de trabalho seguro e saudável, conforme preconizado pela legislação pertinente, e que entra em vigor imediatamente.\n2. Aprovar a Portaria ",
+        "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade ": "AVISO DE LICITAÇÃO. A Prefeitura Municipal de Teresina, torna público que realizará licitação na modalidade 001, para a contratação de serviços de limpeza e manutenção de áreas de manuseio de resíduos sólidos, nos termos do art. 11 da Lei 10.520/2002, Art. 37 da Lei 8.666/93 e Art. 51 da Lei 8.666/93",
+        "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. ": "Art. 1º. Fica nomeado para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina o Sr. 1º. A título de gratificação, fica pago ao Sr. 2º.\nA seguir o conteúdo do edital:\n1. O Prefeito Municipal de Teresina, na forma da Lei Orgânica, nomeia para o cargo em comissão de Assessor Técnico da Prefeitura de Teresina, o Sr.\n2. O cargo de Assessor Técnico é de caráter temporário e"
     }
 }
