@@ -136,6 +136,12 @@ def main():
         default=2048,
         help="Comprimento máximo de sequência (max_seq_length)."
     )
+    parser.add_argument(
+        "--max_train_samples",
+        type=int,
+        default=None,
+        help="Número máximo de chunks (amostras) do dataset de treino a serem utilizados."
+    )
     
     args = parser.parse_args()
     
@@ -242,6 +248,11 @@ def main():
         train_dataset = dataset_split["train"]
         eval_dataset = dataset_split["test"]
         
+        # Limita o dataset de treino se especificado
+        if args.max_train_samples is not None and args.max_train_samples > 0 and len(train_dataset) > args.max_train_samples:
+            print(f"✂️  Limitando treino de {len(train_dataset)} → {args.max_train_samples} chunks (treino mais rápido/controlado).")
+            train_dataset = train_dataset.select(range(args.max_train_samples))
+            
         # Limita o dataset de validação durante o treino para evitar eval lenta
         if args.max_eval_samples > 0 and len(eval_dataset) > args.max_eval_samples:
             print(f"✂️  Limitando eval de {len(eval_dataset)} → {args.max_eval_samples} chunks (treino mais rápido).")
