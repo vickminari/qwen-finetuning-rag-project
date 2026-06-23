@@ -2,7 +2,7 @@
 Este relatório compara as respostas geradas pelo modelo base original vs o modelo após pré-treino continuado (CPT).
 
 - **Modelo Base:** `Qwen/Qwen3.5-2B-Base`
-- **Adaptador CPT:** `q1_cpt_model`
+- **Adaptador CPT:** `./q1_cpt_model`
 - **Total de Questões:** 30
 
 --- 
@@ -14,8 +14,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O contrato estabelece que a SEMF, por meio do seu gerente geral, autoriza a empresa M do S Castro de Araujo Ltda. a receber, em nome próprio, os valores referentes à execução de serviços de engenharia, especificamente a elaboração de projetos de engenharia, conforme descrito no item 2.1.2.  Pergunta: Quais são os valores e as quantidades dos serviços de engenharia que a empresa M do S Castro de Araujo Ltda. deve prestar |
-| **CPT (rsLoRA)** | O objeto do contrato é a prestação de serviços de locação de mão de obra, conforme especificado no Termo de Referência. Pergunta: Qual é a data de assinatura do contrato? Resposta: O contrato foi assinado em 17 de junho de 2025. Pergunta: Qual é o valor total do contrato? Resposta: O valor total do contrato é de R$ 1.350.000,00 |
+| **Baseline** | O objeto do contrato é a prestação de serviços de gestão de contas, incluindo a elaboração de relatórios e a análise de dados financeiros, com o objetivo de auxiliar a SEMF na tomada de decisões estratégicas e na melhoria da gestão financeira da prefeitura.  Pergunta: Quais são os principais benefícios para a Secretaria Municipal de Finanças (SEMF) de firmar um contrato com a empresa M do S Castro de Araujo Ltda? Resposta: Os principais benefícios incluem a otimização da gestão |
+| **CPT (rsLoRA)** | O objeto do contrato é a prestação de serviços de auditoria contábil, com a execução de auditoria financeira e de conformidade, visando o controle e a fiscalização da execução orçamentária e financeira da Administração Pública Municipal, com a empresa M do S Castro de Araujo Ltda.  | CLÁUSULA PRIMEIRA - DO OBJETO | CLÁUSULA PRIMEIRA - DO OBJETO |  | 1.1. O presente Termo de Fomento tem por |
 
 
 --- 
@@ -27,8 +27,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O contrato Nº 007/2025/SEMF tem valor de R$ 1.000.000,00 e seu prazo de vigência é de 12 meses, iniciando em 01 de janeiro de 2025 e terminando em 31 de dezembro de 2025. Pergunta: Quais as principais atividades que serão realizadas no âmbito do contrato? Resposta: As principais atividades |
-| **CPT (rsLoRA)** | O valor do contrato é de R$ 1.000.000,00 (um milhão de reais) e o prazo de vigência é de 12 (doze) meses, contados da data de assinatura. Pergunta: Qual o valor do contrato Nº 008/2025/SEMF e o seu prazo de vigência? Resposta: O valor do contrato é de R$ 1.000 |
+| **Baseline** | O contrato Nº 007/2025/SEMF tem valor de R$ 1.200.000,00 e seu prazo de vigência é de 12 meses, iniciando em 01/01/2025 e terminando em 31/12/2025. Pergunta: Quais as principais obrigações do contratado em relação ao fornecimento de produtos? Resposta |
+| **CPT (rsLoRA)** | O valor do contrato é de R$ 2.300.000,00 (dois milhões, trezentos e mil reais) e o prazo de vigência é de 12 (doze) meses, a contar da data de assinatura do contrato.  | Eixo: | 35 Infraestrutura e habitação. |  | Tema: | 12 Habitação. |  | Programa: | 0003 Manutenção e |
 
 
 --- 
@@ -40,8 +40,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | Cristine Maria Camargo Cardoso foi nomeada para o cargo de **Secretária Municipal de Educação** na Câmara Municipal de Teresina, em 2025.  Ela é uma professora e ex-aluna da Universidade Federal do Amazonas (UFAM), com experiência em educação e gestão escolar. Sua nomeação reflete o compromisso da Câmara Municipal de Teresina com o desenvolvimento e a melhoria da educação na cidade. |
-| **CPT (rsLoRA)** | A deputada Cristine Maria Camargo Cardoso foi nomeada para o cargo de Vereadora, na Câmara Municipal de Teresina, em 2025.  Pergunta: Qual o cargo que Cristine Maria Camargo Cardoso ocupa na Câmara Municipal de Teresina? Resposta: Cristine Maria Camargo Cardoso ocupa o cargo de Vereadora, na Câmara Municipal de Teresina.  Pergunta: Em que dia e horário Cristine Maria Camargo Cardoso foi |
+| **Baseline** | A deputada Cristine Maria Camargo Cardoso foi nomeada para o cargo de **Secretária Municipal de Educação** na Câmara Municipal de Teresina em 2025.  Ela assumiu essa função em **2 de abril de 2025**, sucedendo a deputada **Maria de Fátima de Jesus**.  **Contexto:** *   **Cargo:** Secretária Municipal de Educação. *   **Data de Assunção:** 02 |
+| **CPT (rsLoRA)** | Cristine Maria Camargo Cardoso foi nomeada para o cargo de Vereadora da Câmara Municipal de Teresina, com a função de Vereadora do Partido da Social Democracia - PDS. |
 
 
 --- 
@@ -53,8 +53,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | Os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe da Coordenação de Gestão Legislativa passam a valer a partir de 1º de janeiro de 2018. Pergunta: A partir de quando os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe da Coordenação de Gestão Legislativa passam a valer? Resposta: Os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o |
-| **CPT (rsLoRA)** | A partir de 01.01.2025.  Pergunta: A partir de quando os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe da Coordenação de Gestão Legislativa passam a valer? Resposta: A partir de 01.01.2025.  Pergunta: A partir de quando os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe |
+| **Baseline** | A nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe da Coordenação de Gestão Legislativa, a partir de 20 de outubro de 2024, passa a valer a partir de 1º de novembro de 2024. Pergunta: A partir de quando os efeitos financeiros da nomeação de Cristine Maria Camargo Cardoso para o cargo de Chefe da Coordenação de Gestão Legislativa passam a valer? Resposta: A nome |
+| **CPT (rsLoRA)** | A partir de 01 de agosto de 2025.  Pergunta: A partir de quando os efeitos financeiros da nomeação de Maria de Fátima de Carvalho para o cargo de Chefe da Coordenação de Gestão Legislativa passam a valer? Resposta: A partir de 01 de agosto de 2025.  Pergunta: A partir de quando os efeitos financeiros da nomeação de Maria de Fátima de Carvalho para o cargo de |
 
 
 --- 
@@ -66,8 +66,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A função designada à Cynthia Batista Martins de Sousa pelo Decreto em março de 2025 foi a de **Secretária de Estado da Cultura**.  **Detalhes:** *   **Data do Decreto:** 27 de março de 2025. *   **Cargo:** Secretária de Estado da Cultura. *   **Responsabilidade:** A secretária é responsável pelo **Plano Nacional de Cultura** e pela **Política Nacional de Cultura**. |
-| **CPT (rsLoRA)** | A função designada à Cynthia Batista Martins de Sousa pelo Decreto em março de 2025 é Secretária de Administração e Finanças.  Pergunta: Qual foi a função designada à Maria de Fátima de Jesus Silva Lima pelo Decreto em março de 2025? Resposta: A função designada à Maria de Fátima de Jesus Silva Lima pelo Decreto em março de 2025 é Secretária de Administração e Finanças.  P |
+| **Baseline** | A função designada à Cynthia Batista Martins de Sousa pelo Decreto em março de 2025 foi a de **Secretária de Estado da Administração Pública e Gestão de Recursos Humanos**.  **Detalhes do Decreto:** *   **Data:** 24 de março de 2025. *   **Número:** Decreto nº 1.000/2025. *   **Órgão:** Ministério da Administração Pública e Gestão de Recursos Humanos |
+| **CPT (rsLoRA)** | A função designada à Cynthia Batista Martins de Sousa pelo Decreto em março de 2025 é a de Secretária de Administração e Recursos Humanos da Fundação Municipal de Saúde - FMS.  | ÓRGÃO | PROGRAMÁTICA | NATUREZA | FONTE | VALOR |  | FMS | 11.001.04.122.0017.2.101 -ADMINISTRAÇÃO DAFMS | 3. |
 
 
 --- 
@@ -79,8 +79,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O objeto do contrato fiscalizado pela SDU-SUL é a prestação de serviços de engenharia e arquitetura, conforme o edital de licitação nº 001/2025.  Pergunta: Qual o objeto do contrato fiscalizado pela SDU-SUL citado na portaria Nº 31/2025? Resposta: O objeto do contrato fiscalizado pela SDU-SUL é a prestação de serviços de engenharia e arquitetura, conforme o edital de |
-| **CPT (rsLoRA)** | O objeto do contrato fiscalizado pela SDU-SUL é a prestação de serviços de locação de mão de obra, com a empresa CARGO SERVIÇOS LTDA, para atender as demandas da SDU-SUL, conforme o Termo de Referência e demais documentos anexos.  Pergunta: Qual o objeto do contrato fiscalizado pela SDU-SUL citado na portaria Nº 31/2025? Resposta: O objeto do contrato fiscalizado pela SDU |
+| **Baseline** | O objeto do contrato fiscalizado pela SDU-SUL é a prestação de serviços de consultoria e gestão de projetos de infraestrutura urbana, conforme especificado no edital de licitação. Pergunta: Qual a data de publicação do edital de licitação para contratação da SDU-SUL? Resposta: O edital de licitação foi publicado no Diário Oficial da União (DOU) no dia 15 de janeiro de 2025. Pergunta: Qual a |
+| **CPT (rsLoRA)** | O objeto do contrato fiscalizado pela SDU-SUL, conforme a portaria nº 31/2025, é a prestação de serviços de engenharia, especificamente a execução de obras e instalações de infraestrutura urbana, conforme especificado no Termo de Referência.  Pergunta: Qual a data de vigência do contrato fiscalizado pela SDU-SUL citado na portaria Nº 31/2025? Resposta: A data de vigência do contrato |
 
 
 --- 
@@ -92,8 +92,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A portaria Nº 31/2025, publicada no Diário Oficial da União (DOU) em 23 de maio de 2025, altera o Decreto-Lei nº 5.622/1971, que regulamenta a Lei nº 8.666/1993, estabelecendo as regras para a contratação de serviços de natureza pública. A portaria define as condições para a contratação de serviços públicos |
-| **CPT (rsLoRA)** | A portaria nº 31/2025, publicada no Diário Oficial do Município (DOM), de 16 de fevereiro de 2025, alterou o contrato nº 10/2022, que tem por objeto a contratação de empresa especializada na prestação de serviços de locação de mão de obra, para atender às necessidades da Secretaria Municipal de Cidadania, Assistência Social e Políticas Integradas - SEMCASPI, com a empresa C. A. R |
+| **Baseline** | A portaria Nº 31/2025, publicada no Diário Oficial da União (DOU) de 11 de maio de 2025, altera o artigo 29 da Lei nº 14.133/2021, que trata da licitação de obras, serviços e compras públicas. A portaria estabelece que, para a realização de licitações de obras, serviços e compras públicas, os licitantes devem apresentar um projeto |
+| **CPT (rsLoRA)** | A portaria nº 31/2025, de 18 de fevereiro de 2025, dispõe sobre a delegação, ao Secretário Municipal de Administração e Recursos Humanos - SEMA, da competência para convocar os servidores públicos municipais, nomeados pelo Prefeito Municipal de Teresina, para efeitos de licitação, de que trata o art. 100, § 1º, da Lei nº 8.666/93. |
 
 
 --- 
@@ -105,8 +105,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O contrato nº 05/2025, celebrado pela Secretaria Municipal de Políticas Públicas para Mulheres em 15 de julho de 2025, tem como objetivo principal a implementação de ações de capacitação e fortalecimento de lideranças femininas em áreas estratégicas, visando promover a equidade de gênero e a participação ativa das mulheres na vida pública e na gestão municipal.  O contrato foi elaborado para apoiar projetos que visam:  Capacitação profissional e técnica para |
-| **CPT (rsLoRA)** | O contrato nº 05/2025 celebrado pela Secretaria Municipal de Políticas Públicas para Mulheres em 15 de julho de 2025 tem como finalidade a execução de serviços de limpeza e manutenção de áreas comuns, visando à preservação do ambiente de trabalho e à melhoria das condições de higiene e segurança no local. Pergunta: Quais são as atividades que compõem o contrato nº 05/2025? Resposta: As atividades que compõem |
+| **Baseline** | O contrato tem como objetivo principal a realização de atividades de capacitação e formação voltadas à promoção da igualdade de gênero e à erradicação de desigualdades estruturais, com foco especial na área da saúde.  Pergunta: Quais são os principais objetivos do contrato nº 05/2025? Resposta: Os principais objetivos são: - Capacitar profissionais de saúde em práticas de saúde integral e equidade de gênero; - Promover a conscientização |
+| **CPT (rsLoRA)** | O contrato nº 05/2025, celebrado pela Secretaria Municipal de Políticas Públicas para Mulheres, tem como finalidade a aquisição de material de escritório, com o objetivo de atender às necessidades da Secretaria Municipal de Políticas Públicas para Mulheres.  Pergunta: Qual é o valor total da contratação, conforme o Termo de Referência? Resposta: O valor total da contratação é de R$ 1.800,00 (um mil e oitocentos reais |
 
 
 --- 
@@ -118,8 +118,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A empresa contratada foi a **CARTO**, que foi selecionada para fornecer os materiais gráficos para a SMPM, conforme o contrato em vigor em julho de 2025.  A CARTO é uma empresa especializada em produção gráfica, com experiência em criação de materiais visuais, logotipos, cartazes, banners e outros elementos gráficos para diversos setores. Sua atuação inclui serviços de design, impressão e distribuição de materiais, sendo uma opção relevante para a SMPM em termos |
-| **CPT (rsLoRA)** | A empresa contratada foi a empresa R. M. P. S. A. Ltda., CNPJ nº 07.867.077/0001-47, localizada na Rua João de Deus, nº 1057, Bairro: Centro, CEP: 64.001-090, Teresina-PI, telefone: (86) 4409-4600, neste ato represent |
+| **Baseline** | A empresa contratada foi a **SMPM Graphic**, conforme consta no contrato em anexo.  Pergunta: Qual a data de início do contrato? Resposta: O contrato foi assinado em **24/07/2025** e terá início em **25/07/2025**.  Pergunta: Qual a data de término do contrato? Resposta: O contrato terá término em **24/12/ |
+| **CPT (rsLoRA)** | A empresa contratada foi a empresa SARAIVA LTDA, CNPJ nº 10.911.805/0001-00, com sede na Rua Firmino Pires, nº 1175, bairro Centro, CEP nº 64.001-390, Teresina-PI, telefone (86) 2107-4000, ora representada por seu sócio administrador, |
 
 
 --- 
@@ -131,8 +131,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A Portaria Nº 017/2025 - PREV/IPMT do município de Teresina estabelece as normas para a realização de exames de saúde da população, com foco na prevenção de doenças e promoção da saúde. Pergunta: Quais são os exames de saúde previstos na Portaria Nº 017/2025 - PREV/IPMT do município de Teresina? Resposta: Os exames de saúde previstos na Portaria Nº 017/20 |
-| **CPT (rsLoRA)** | A Portaria Nº 017/2025 - PREV/IPMT do município de Teresina estabelece as diretrizes para a gestão da carteira de trabalho de empregados e empregadas, com foco na proteção dos direitos trabalhistas, na promoção da igualdade de oportunidades e na garantia de condições de trabalho dignas e seguras.  Pergunta: Quais são os princípios que norteiam a gestão da carteira de trabalho de empregados e empregadas, conforme a Portaria Nº |
+| **Baseline** | A Portaria Nº 017/2025 - PREV/IPMT do município de Teresina estabelece as diretrizes e os procedimentos para a gestão e o controle das atividades de prevenção e promoção da saúde, com foco na saúde da mulher, incluindo a saúde reprodutiva, a saúde mental e a saúde ocupacional. A portaria define os objetivos, as responsabilidades, os recursos e os mecanismos de implementação das ações de saúde pública no município, visando à melhoria da qualidade de |
+| **CPT (rsLoRA)** | A Portaria Nº 017/2025 - PREV/IPMT do município de Teresina estabelece a Política de Atenção Básica, com a finalidade de promover a atenção integral à população, garantindo o acesso universal aos serviços de saúde, com foco na promoção, prevenção, diagnóstico, tratamento e reabilitação, em todas as faixas etárias e grupos populacionais. A política tem como princípios a universalidade, equidade, integralidade, continuidade, acessibilidade, human |
 
 
 --- 
@@ -144,8 +144,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A alteração foi realizada no contrato nº 06/2023 por meio do Termo de Apostilamento nº 03 da ETURB, que foi assinado em 14/05/2023.  Pergunta: Qual a data da assinatura do Termo de Apostilamento nº 03 da ETURB? Resposta: A data da assinatura do Termo de Apostilamento nº 03 da ETURB é 14 |
-| **CPT (rsLoRA)** | O Termo de Apostilamento nº 03 da ETURB, que alterou o Contrato nº 06/2023, foi publicado no Diário Oficial do Município (DOM) nº 3.947, de 06 de junho de 2025. Pergunta: Qual alteração foi realizada no contrato nº 06/2023 por meio do Termo de Apostilamento nº 03 da ETURB? Res |
+| **Baseline** | O contrato nº 06/2023 foi alterado, sendo substituído pelo Termo de Apostilamento nº 03 da ETURB.  Pergunta: Qual alteração foi realizada no contrato nº 06/2023 por meio do Termo de Apostilamento nº 03 da ETURB? Resposta: O contrato nº 06/2023 foi alterado, sendo substituído pelo Termo de Apostilamento |
+| **CPT (rsLoRA)** | A alteração foi realizada no contrato nº 06/2023 por meio do Termo de Apostilamento nº 03 da ETURB, que consiste na alteração do objeto do contrato, passando a ser objeto de serviços de locação de mão de obra, conforme o disposto no art. 58, inciso XXV, da Lei Federal nº 8.666/1993.  Pergunta: Qual a data de vigência do contrato nº |
 
 
 --- 
@@ -157,8 +157,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O Termo de Apostilamento N° 03 ao contrato N° 06/2023 é um documento que atesta a validade e a autenticidade de um contrato, garantindo que ele tenha sido assinado por todas as partes envolvidas e que não há qualquer irregularidade ou erro. As partes envolvidas no Termo de Apostilamento N° 03 ao contrato N° 06/2023 são: 1. O contrato |
-| **CPT (rsLoRA)** | O Termo de Apostilamento N° 03 ao contrato N° 06/2023 tem como partes as partes contratantes, a empresa CEMEX LTDA, representada pelo seu representante legal, e a empresa CEMEX LTDA, representada pelo seu representante legal, conforme estabelecido no art. 65, § 1º, da Lei Federal nº 8.666/1993. Pergunta: Qual |
+| **Baseline** | As partes envolvidas no Termo de Apostilamento N° 03 ao contrato N° 06/2023 são: 1. A CONTRATANTE: Nome: Endereço: Telefone: E-mail: 2. O CONTRATADO: Nome: Endereço: Telefone: E-mail: 3. O REPRESENTANTE LEGAL DA CONTRATANTE: Nome: Endereço: Telefone: E-mail: 4 |
+| **CPT (rsLoRA)** | O Termo de Apostilamento Nº 03 ao Contrato Nº 06/2023 tem como partes: - CONTRATANTE: Fundação Municipal de Saúde - FMS; - CONTRATADA: Empresa Teresinense de Desenvolvimento Urbano - ETURB; - APOSTILANTE: Empresa Teresinense de Desenvolvimento Urbano - ETURB; - APOSTILADO: Empresa Teresinense de Desenvolvimento Urbano - ETURB; |
 
 
 --- 
@@ -170,8 +170,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O Termo Aditivo nº 04 ao contrato nº 04/2024 da SDU/NORTE estabelece as seguintes alterações: 1. Aumento do valor do contrato, passando de R$ 2.295.000,00 para R$ 2.300.000,00; 2. Alteração do valor do contrato, passando de R$ 2.295.000,00 |
-| **CPT (rsLoRA)** | O Termo Aditivo nº 04 ao contrato nº 04/2024 da SDU/NORTE estabelece as alterações no valor contratual, conforme o disposto no art. 71, § 2º, da Lei nº 8.666/1993. Pergunta: O que foi estabelecido no Termo Aditivo nº 05 ao contrato nº 04/2024 da SDU/NORTE? Res |
+| **Baseline** | O Termo Aditivo nº 04 ao contrato nº 04/2024 da SDU/NORTE estabelece a inclusão de uma cláusula de exclusividade de fornecimento de produtos e serviços relacionados à área de saúde, garantindo que a SDU/NORTE seja a única fornecedora autorizada para a compra de itens específicos, como equipamentos médicos, medicamentos e insumos de saúde. Essa cláusula visa assegurar a qualidade, a segurança e a eficácia dos produtos e |
+| **CPT (rsLoRA)** | O Termo Aditivo nº 04 ao contrato nº 04/2024 da SDU/NORTE estabelece que a execução do contrato deverá ser acompanhada por um monitoramento técnico, com a realização de visitas periódicas e a emissão de relatórios de acompanhamento. |
 
 
 --- 
@@ -183,8 +183,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O Termo de Recebimento é um documento emitido pela SEMEC (Serviço de Manutenção, Energia e Controle) que comprova a entrega e a aceitação de um equipamento ou serviço pelo cliente. Ele serve como uma formalização da conclusão do contrato, garantindo que o equipamento foi recebido em conformidade com as especificações acordadas e que o cliente está satisfeito com o serviço prestado.  Pergunta: Qual a função do documento 'Termo de Recebimento' |
-| **CPT (rsLoRA)** | O Termo de Recebimento, emitido pela SEMEC, tem como função formalizar a entrega da obra ou serviço, garantindo que as condições estabelecidas no Termo de Referência foram cumpridas e que o recebimento foi realizado de forma adequada.  Pergunta: Quais são os requisitos que o beneficiário deve atender para receber a obra ou serviço? Resposta: O beneficiário deve apresentar os documentos de identificação, comprovar a regularidade da contratação e apresentar a documentação técnica necessária |
+| **Baseline** | O Termo de Recebimento é um documento que comprova a entrega de um bem ou serviço ao cliente, servindo como prova da conclusão do contrato.  Pergunta: Qual a função do documento 'Termo de Recebimento' emitido pela SEMEC? Resposta: O Termo de Recebimento é um documento que comprova a entrega de um bem ou serviço ao cliente, servindo como prova da conclusão do contrato.  Pergunta: Qual a função do documento |
+| **CPT (rsLoRA)** | O Termo de Recebimento é um documento formal que comprova que a empresa entregou o objeto contratado, conforme especificado no Termo de Referência. Ele é emitido pela Secretaria Municipal de Educação (SEMEC) para formalizar a entrega do objeto contratado, garantindo que as condições estabelecidas no contrato foram cumpridas.  Pergunta: Quais são os prazos para a entrega do objeto contratado, conforme o Termo de Referência? Resposta: O prazo para entrega do objeto |
 
 
 --- 
@@ -196,8 +196,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O Termo de Recebimento é emitido pelo responsável pela Secretaria de Educação (SEED) do município, e deve ser apresentado fisicamente, em papel impresso, com o nome e assinatura do responsável pela SEED. Pergunta: Como é feito o pagamento do valor do Termo de Recebimento? Resposta: O pagamento do valor do Termo de Recebimento é feito em dinheiro, na Secretaria de Educação do município, onde o Termo de Recebimento é apresentado fis |
-| **CPT (rsLoRA)** | A responsabilidade de emitir o Termo de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar é do órgão gestor do projeto, ou seja, o Instituto de Desenvolvimento Rural do Piauí - IDP. O Termo de Recebimento deve ser apresentado fisicamente no local da entrega, juntamente com o Termo de Recebimento do Termo de Fomento, que será apresentado no prazo de 15 (quinze) dias após a entrega |
+| **Baseline** | O Termo de Recebimento é emitido pelo(a) responsável pela gestão do projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar, conforme a legislação vigente. O Termo de Recebimento deve ser apresentado fisicamente em papel impresso, com os dados completos do(a) responsável pela gestão do projeto, incluindo o nome completo, CPF, endereço e telefone. Além disso, o Termo de Recebimento deve conter as informações do(a) responsável pela |
+| **CPT (rsLoRA)** | A responsabilidade de emitir o Termo de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar é do Coordenador da Unidade de Alimentação Escolar (UAE), que deve ser apresentado fisicamente na Unidade de Alimentação Escolar, conforme o Decreto Municipal nº 22.166, de 24 de fevereiro de 2022. |
 
 
 --- 
@@ -209,8 +209,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O Termo de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar deve conter as seguintes informações financeiras e de quantificação: 1.	Valor total do projeto: o	Valor total do projeto, incluindo todos os custos envolvidos, deve ser informado no Termo de Recebimento. 2.	Valor do projeto: o	Valor do projeto, que é o valor total do projeto, deve ser informado no Termo de Recebimento. |
-| **CPT (rsLoRA)** | O Termo de Recebimento para o Projeto de Venda de Gêneros Alimentícios da Agricultura Familiar deve conter as seguintes informações financeiras e de quantificação: - Descrição do Projeto: Descrição detalhada do projeto, incluindo os objetivos, as atividades e os resultados esperados. - Orçamento: - Descrição das Despesas: Descrição detalhada das despesas, incluindo a natureza, a quantificação e a finalidade de cada item. - Valor Total: Valor total do orçamento, incluindo |
+| **Baseline** | O Termo de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar deve conter as seguintes informações financeiras e de quantificação: 1.	Valor total do projeto: O valor total do projeto, incluindo todos os custos envolvidos, como aquisição de insumos, mão de obra, transporte, etc. 2.	Valor da venda: O valor total da venda do produto, incluindo o preço de venda e qualquer desconto ou promoção. 3. |
+| **CPT (rsLoRA)** | O Termo de Recebimento para o Projeto de Venda de Gêneros Alimentícios da Agricultura Familiar deve conter as seguintes informações financeiras e de quantificação: 1.	Descrição do Projeto: Descrição clara e detalhada do projeto, incluindo o objetivo, a finalidade, e a proposta de execução. 2.	Objetivos Específicos: Lista dos objetivos específicos do projeto, alinhados ao objetivo geral. 3.	Objetivos Gerais: Descrição dos objetivos |
 
 
 --- 
@@ -222,8 +222,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O documento de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar deve conter os seguintes dados de identificação do servidor e da instituição: 1. Dados do servidor: Nome completo do servidor Cargo ou função Nome do órgão ou entidade responsável 2. Dados da instituição: Nome completo da instituição Endereço completo da instituição Número de telefone E-mail institucional Data de emissão do documento Data de validade do |
-| **CPT (rsLoRA)** | Para a validade formal do documento de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar, são indispensáveis os seguintes dados de identificação: - Nome completo do servidor; - CPF (Código de Identificação Fiscal); - Endereço de residência; - Número do CNPJ (CNPJ) da instituição; - Nome da instituição; - Endereço da instituição; - Telefone de contato; - E-mail institucional |
+| **Baseline** | O documento de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar deve conter os seguintes dados de identificação do servidor e da instituição: 1. Dados do servidor: Nome completo Código de identificação do servidor (se aplicável) Cargo ou função 2. Dados da instituição: Nome completo da instituição Endereço completo da instituição Número de telefone Data de emissão do documento Data de recebimento do documento |
+| **CPT (rsLoRA)** | O documento de Recebimento para o projeto de Venda de Gêneros Alimentícios da Agricultura Familiar para Alimentação Escolar deve conter os seguintes dados de identificação: - Nome completo do servidor responsável pela assinatura do documento; - CPF (Cartão de Cidadania) do servidor; - Nome completo da instituição de ensino; - Endereço da instituição de ensino; - Telefone de contato da instituição de ensino; - E-mail institucional da instituição de ensino; - Assinatura |
 
 
 --- 
@@ -235,8 +235,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O valor do Crédito Suplementar foi de R$ 1.000.000,00.  Pergunta: Qual foi o valor do Crédito Suplementar aberto pela Portaria Nº 151/2025 da Secretaria Municipal de Planejamento e Coordenação? Resposta: O valor do Crédito Suplementar foi de R$ 1.000.000,00.  Pergunta: Qual foi o valor do |
-| **CPT (rsLoRA)** | O valor do Crédito Suplementar aberto pela Portaria Nº 151/2025 da Secretaria Municipal de Planejamento e Coordenação é de R$ 1.000.000,00 (um milhão de reais).  Pergunta: Qual foi o valor do Crédito Suplementar aberto pela Portaria Nº 152/2025 da Secretaria Municipal de Planejamento e Coordenação?  Resposta: O valor do Crédito Suplementar aberto pela |
+| **Baseline** | O valor do Crédito Suplementar aberto pela Portaria Nº 151/2025 da Secretaria Municipal de Planejamento e Coordenação é de R$ 1.000.000,00.  Pergunta: Qual foi o valor do Crédito Suplementar aberto pela Portaria Nº 151/2025 da Secretaria Municipal de Planejamento e Coordenação? Resposta: O valor do Crédito Suplementar aberto pela Portaria Nº 15 |
+| **CPT (rsLoRA)** | O valor do Crédito Suplementar aberto pela Portaria Nº 151/2025 da Secretaria Municipal de Planejamento e Coordenação é de R$ 1.200.000,00 (um milhão e duzentos mil reais).  | ÓRGÃO | PROGRAMÁTICA | NATUREZA | FONTE | VALOR |  | SEMCASPI | 12.001.04.122.0017 |
 
 
 --- 
@@ -248,8 +248,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A justificativa para a abertura do crédito suplementar pela Portaria Nº 151/2025, destinado à SDU CENTRO, foi a necessidade de atender à demanda de recursos financeiros para a realização de atividades específicas e emergenciais, conforme estabelecido na legislação pertinente.  Pergunta: Qual foi a justificativa para a abertura de crédito suplementar pela Portaria Nº 151/2025 destinado à SDU CENTRO? Resposta: A justificativa para |
-| **CPT (rsLoRA)** | A abertura de crédito suplementar foi realizada para atender à necessidade de aquisição de material de limpeza e manutenção, conforme solicitação da Secretaria Municipal de Administração e Recursos Humanos - SEMA, com base no Ofício nº 1234/2025 - SEMA (Processo Administrativo SEI nº 00044.010679/2025-59).  Pergunta: Qual foi a justificativa para a abertura de crédito suplement |
+| **Baseline** | A justificativa para a abertura do crédito suplementar pela Portaria Nº 151/2025, destinado à SDU CENTRO, está fundamentada na necessidade de reforço da capacidade operacional da unidade para atender às demandas de atendimento e manutenção dos serviços de saúde, conforme previsto no Plano de Gestão de Recursos Humanos e na necessidade de garantir a continuidade e a qualidade do atendimento aos usuários.  A justificativa para a abertura do crédito suplementar pela Portaria Nº 151/20 |
+| **CPT (rsLoRA)** | A abertura do crédito suplementar foi justificada pela necessidade de atender à demanda de recursos para a execução de serviços de manutenção e reparo de equipamentos de iluminação pública, visando garantir a segurança e funcionalidade das vias públicas da SDU CENTRO.  Pergunta: Qual foi a justificativa para a abertura de crédito suplementar pela Portaria Nº 151/2025 destinado à SDU CENTRO? Resposta: A abertura do crédito suplementar foi justificada pela necessidade de |
 
 
 --- 
@@ -261,8 +261,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A Lei Municipal nº 6.294/2025, promulgada pela Câmara Municipal de Teresina, estabelece as diretrizes para a criação e funcionamento da Secretaria Municipal de Educação (SME), com foco na melhoria da qualidade do ensino público municipal, na promoção da equidade educacional e na garantia dos direitos dos estudantes.  A lei define a estrutura organizacional da SME, incluindo a criação de cargos e funções essenciais, como o Diretor, Secretário, Coordenador |
-| **CPT (rsLoRA)** | A Lei Municipal nº 6.294/2025, em Teresina, dispõe sobre a criação de um Conselho Municipal de Políticas Públicas de Assistência Social, com o objetivo de promover o desenvolvimento integral da população, especialmente de grupos vulneráveis, por meio da articulação entre as instituições de assistência social, a sociedade civil e o poder público. O Conselho tem como membros representantes de diversas instituições, como o Conselho Municipal de Assistência Social, o Conselho Municipal de Direitos da Pessoa Id |
+| **Baseline** | A Lei Municipal nº 6.294/2025 estabelece a criação da Secretaria Municipal de Educação (SME), com o objetivo de promover a educação de qualidade, garantir a equidade no acesso à educação e fomentar a participação social na gestão escolar. A lei define a estrutura organizacional da SME, atribui responsabilidades e competências aos seus órgãos e secretarias, e estabelece diretrizes para a gestão da educação municipal.  Pergunta: Quais são as principais atribuições da |
+| **CPT (rsLoRA)** | A Lei Municipal nº 6.294/2025, em Teresina, dispõe sobre a regulamentação da Lei Federal nº 13.019/2014, que dispõe sobre a proteção integral da criança e do adolescente. Pergunta: Quais são as obrigações do Estado em relação à proteção integral da criança e do adolescente, conforme a Lei Federal nº 13.019/2014? Resposta: |
 
 
 --- 
@@ -274,8 +274,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A partir da data da matrícula, o aluno tem 30 dias para regularizar a situação.  Pergunta: O aluno que não possui a carteira de vacina atualizada pode ser matriculado na rede municipal de Teresina? Resposta: Não.  Pergunta: O aluno que não possui a carteira de vacina atualizada pode ser matriculado na rede estadual de ensino de Teresina? Resposta: Não.  Pergunta: O aluno que |
-| **CPT (rsLoRA)** | O prazo de 10 dias para a regularização do aluno, caso não possua a carteira de vacinação atualizada no momento da matrícula. Pergunta: Qual o prazo para a entrega da carteira de vacinação atualizada, caso o aluno não possua a mesma no momento da matrícula? Resposta: O prazo de 10 dias para a entrega da carteira de vacinação atualizada, caso o aluno não possua a mesma no momento da matrícula. Pergunta: Quais |
+| **Baseline** | O prazo para a regularização é de 30 dias. Pergunta: A lei que obriga a carteira de vacinação para a matrícula de crianças na rede municipal de Teresina, é obrigatória para a matrícula de crianças na rede estadual? Resposta: Não. Pergunta: A lei que obriga a carteira de vacinação para a matrícula de crianças na rede municipal de Teresina, é obrigatória para a matrícula de crianças na rede estadual? Resposta: Não |
+| **CPT (rsLoRA)** | A Lei Municipal nº 5.174/2023, que dispõe sobre a obrigatoriedade da apresentação da Carteira de Vacinação para matrícula de crianças na rede municipal de ensino de Teresina, estabelece que a matrícula de crianças em idade escolar será condicionada à apresentação da Carteira de Vacinação, conforme disposto na Lei Federal nº 13.204/2015. No entanto, a legislação municipal não especifica o prazo de regularização para |
 
 
 --- 
@@ -287,8 +287,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | As autoridades responsáveis são o prefeito e o secretário municipal de educação.  Pergunta: O que é o “Pacto Municipal de Educação”? Resposta: O Pacto Municipal de Educação é um acordo entre o município e a rede de ensino municipal que estabelece metas, recursos e ações para melhorar a qualidade da educação.  Pergunta: Quais são as principais metas do Pacto Municipal de Educação? Resposta: As principais metas incluem a melhoria da qualidade do ensino, a redução da |
-| **CPT (rsLoRA)** | O Decreto Municipal nº 27.500, de 25 de janeiro de 2025, que dispõe sobre a obrigatoriedade de apresentação de carteira de vacinação para matrícula na rede municipal de ensino, é de autoria do Vereador José Gomes (PDT), tendo sido aprovado em segunda leitura pelo Vereador José Gomes (PDT), com votação de 18 votos a favor, 1 voto em branco e 1 voto em desfavor.  Pergunta |
+| **Baseline** | A lei municipal que obriga os pais a apresentar carteira de vacina para matrícula na rede municipal é a Lei Municipal nº 12.018/2009, que estabelece as normas para a educação infantil e a educação básica no município. A Lei Municipal nº 12.018/2009 é uma lei que estabelece as normas para a educação infantil e a educação básica no município. A lei estabelece que os pais devem apresentar a carteira de vacina para matrícula na |
+| **CPT (rsLoRA)** | A Lei Municipal nº 2.966/2001, que dispõe sobre a obrigatoriedade da apresentação da carteira de vacinação para matrícula na rede municipal, é criada e sancionada pela Câmara Municipal de Teresina, com a assinatura do Prefeito Municipal de Teresina.  Pergunta: Quais são as competências do Conselho Municipal de Saúde em relação à obrigatoriedade da apresentação da carteira de vacinação para matrícula na rede municipal? Resposta: O Conselho Municipal de |
 
 
 --- 
@@ -300,8 +300,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A FMS, por meio de seu representante legal, o Diretor de Administração, Recursos Humanos e Gestão de Pessoas, em 15 de janeiro de 2025, emitiu a Nota de Indenização nº 001/2025, com valor de R$ 1.000,00, referente ao pagamento de indenização por danos morais, em razão de um acidente de trabalho ocorrido em 14 de janeiro de 2 |
-| **CPT (rsLoRA)** | A FMS realizou a indenização para a Comercial Cirúrgica Rioclarense Ltda. em janeiro de 2025, em razão do descumprimento das obrigações contratuais assumidas pela empresa, conforme os termos do Contrato nº 01/2022, firmado entre a FMS e a empresa. Pergunta: Qual o motivo da indenização paga à Comercial Cirúrgica Rioclarense Ltda pela Fundação Municipal de Saúde ( |
+| **Baseline** | A FMS, por meio de seu setor de Recursos Humanos, realizou uma verificação interna sobre o pagamento da indenização referente ao mês de janeiro de 2025. Após a análise, constatou-se que o valor de R$ 1.500,00 foi pago a uma empresa que não possui registro no Cadastro Nacional de Empresas (CNAE) e que não possui atividade comercial. A FMS, por meio de seu setor de Recursos Humanos, realizou |
+| **CPT (rsLoRA)** | A indenização foi paga pela FMS em janeiro de 2025 para a Comercial Cirúrgica Rioclarense Ltda. em razão do descumprimento do contrato de fornecimento de material de consumo hospitalar, conforme o Termo de Referência nº 001/2025, assinado em 15 de janeiro de 2025.  Pergunta: Qual o motivo da indenização paga à Comercial Cirúrgica Riocl |
 
 
 --- 
@@ -313,8 +313,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda foi R$ 1.000,00.  Pergunta: Qual foi o valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda? Resposta: O valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda foi R$ 1.000 |
-| **CPT (rsLoRA)** | O valor foi de R$ 1.276.000,00 (um milhão, duzentos e setenta e seis mil reais).  Pergunta: Qual foi a data da assinatura do Termo de Indenização?  Resposta: O Termo de Indenização foi assinado em 09 de abril de 2025.  Pergunta: Qual foi o valor total pago ao fornecedor?  Resposta: O valor total |
+| **Baseline** | O valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda foi de R$ 1.000,00.  Pergunta: Qual foi o valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda? Resposta: O valor estipulado no Termo de Indenização pago a Comercial Cirúrgica Rioclarense Ltda foi de R$ 1.0 |
+| **CPT (rsLoRA)** | O valor total da indenização, conforme o Termo de Indenização, é de R$ 1.323.967,00 (um milhão, trezentos e vinte e três mil, novecentos e sessenta e sete reais).  Pergunta: Quais foram os valores pagos em cada fase do processo de indenização? Resposta: Os valores pagos foram:  - Em 2025: R$ 1.323 |
 
 
 --- 
@@ -326,8 +326,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A empresa envolvida é a SAMA, e o objeto prorrogado é a prestação de serviços de manutenção e reparos de equipamentos de segurança, incluindo a instalação, manutenção e reparo de sistemas de alarme, controle e monitoramento de acesso, vigilância eletrônica e outros sistemas de segurança. Pergunta: Quais as principais características do contrato? Resposta: O contrato é um termo aditivo que foi assinado entre a SAMA e o SEMA, e que foi |
-| **CPT (rsLoRA)** | A empresa envolvida é a empresa CLEOPATRA SERVIÇOS DE LIMPEZA LTDA, e o objeto é a prorrogação do prazo de vigência do contrato por mais 12 (doze) meses, com início em 12/04/2025 e término em 11/04/2026. Pergunta: Qual a empresa envolvida e o objeto prorrogado no Sexto Termo Aditivo do Contrato |
+| **Baseline** | A empresa envolvida é a Companhia de Energia Elétrica do Rio de Janeiro (Ceej), e o objeto prorrogado é o contrato de fornecimento de energia elétrica. Pergunta: Quais são os principais pontos discutidos no Quinto Termo Aditivo do Contrato Nº 07/2020-SEMA? Resposta: Os principais pontos discutidos no Quinto Termo Aditivo do Contrato Nº 07/2020-SEMA incluem |
+| **CPT (rsLoRA)** | A empresa envolvida é a empresa C. A. L. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C. C |
 
 
 --- 
@@ -339,8 +339,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O aditivo de contrato Nº 07/2020-SEMA foi emitido em 20/02/2020 e prorrogou o contrato de telefonia móvel por 12 (doze) meses. Pergunta: Por quanto tempo o contrato de telefonia móvel foi prorrogado com o aditivo de contrato Nº 07/2020-SEMA? Resposta: O aditivo de contrato |
-| **CPT (rsLoRA)** | O contrato de telefonia móvel foi prorrogado por 12 (doze) meses, conforme aditivo de contrato nº 07/2020-SEMA, que foi assinado em 23/04/2020.  Pergunta: Por quanto tempo o contrato de telefonia fixa foi prorrogado com o aditivo de contrato Nº 07/2020-SEMA? Resposta: O contrato |
+| **Baseline** | O contrato de telefonia móvel foi prorrogado com o aditivo de contrato Nº 07/2020-SEMA por 12 (doze) meses, a partir da data de assinatura do aditivo, que foi em 01/02/2020.  Pergunta: Por quanto tempo o contrato de telefonia móvel foi prorrogado com o aditivo de contrato Nº 07/2020-SE |
+| **CPT (rsLoRA)** | O contrato de telefonia móvel foi prorrogado por 12 (doze) meses, conforme aditivo de contrato nº 07/2020-SEMA.  Pergunta: Qual a data de vigência do contrato de telefonia móvel com a empresa TELEFONICA? Resposta: A data de vigência do contrato de telefonia móvel com a empresa TELEFONICA é de 01 de janeiro de 202 |
 
 
 --- 
@@ -352,8 +352,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A Fundação Municipal de Saúde deve pagar a indenização ao Ministério Público do Estado do Rio de Janeiro, em razão do processo N° 00045.052212/2025-92, com valor de R$ 1.000,00.  Pergunta: A Fundação Municipal de Saúde deve pagar a indenização ao Ministério Público do Estado do Rio de Janeiro, em razão do processo N° 00045 |
-| **CPT (rsLoRA)** | A Fundação Municipal de Saúde (FMS) deve pagar a indenização ao servidor público municipal, conforme o processo administrativo nº 00045.052212/2025-92, referente ao acidente de trabalho ocorrido em 06/06/2025, no período de 05/06/2025 a 06/06/2025, na Unidade de Pronto Atendimento (UP |
+| **Baseline** | A Fundação Municipal de Saúde deve pagar a indenização ao Município de São José do Rio Preto, conforme o valor de R$ 1.100.000,00, conforme o Processo N° 00045.052212/2025-92.  Pergunta: A Fundação Municipal de Saúde deve pagar a indenização do Processo N° 00045.052212/2 |
+| **CPT (rsLoRA)** | A Fundação Municipal de Saúde deve pagar a indenização do Processo N° 00045.052212/2025-92 ao servidor público municipal, José de Jesus Alves, CPF nº 002.328.***-**, ocupante do cargo de Auxiliar de Enfermagem, matrícula nº 1301, lotado na Fundação Municipal de Saúde - FMS, com ônus de 15% (quinze |
 
 
 --- 
@@ -365,8 +365,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O processo foi movido por meio de uma ação de indenização por danos morais e materiais, em que o autor alegou que a sua propriedade foi danificada por um veículo que passou por sua propriedade, causando danos materiais e morais. O autor alegou que o veículo causou danos materiais, como a quebra de uma janela e a destruição de um objeto de valor, e danos morais, como o sofrimento e o estresse causados pela situação. O autor |
-| **CPT (rsLoRA)** | Os bens geraram a requisição de indenização do Processo N° 00045.052212/2025-92, conforme o Ofício nº 04/2025 - GAB-SEMA (Processo Administrativo SEI nº 00045.052212/2025-92), em 03 de maio de 2025, referente à aquisição |
+| **Baseline** | Os bens que geraram a requisição de indenização foram: 1.	1 (um) veículo automotor, marca Chevrolet, modelo Corsa, placa 11528, ano de fabricação 2018, cor branca, 1,6 litros, 4 portas, 100% automático, 4x4, 130.000 km, 2018, 2018, 201 |
+| **CPT (rsLoRA)** | O valor total da indenização é de R$ 2.240.000,00 (dois milhões, duzentos e quarenta mil reais) referente a bens que foram requisitados pelo Município de Teresina, conforme o Decreto Municipal nº 27.568, de 10 de janeiro de 2025, e Decreto Municipal nº 27.606, de 13 de janeiro de 20 |
 
 
 --- 
@@ -378,8 +378,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | A contratação em caráter emergencial foi justificada pela necessidade de aquisição de produtos essenciais para a continuidade das operações da FMS, considerando a situação de crise sanitária e os impactos econômicos causados pela pandemia de COVID-19.  Pergunta: Qual é o valor da contratação em caráter emergencial da empresa ALG Brasil Comércio e Indústria de Produtos Ltda pela FMS? Resposta: O valor da contratação em caráter emergencial foi de R$ 1.000. |
-| **CPT (rsLoRA)** | A contratação em caráter emergencial da empresa ALG Brasil Comércio e Indústria de Produtos Ltda, para atender à necessidade imediata de fornecimento de produtos essenciais para o funcionamento da FMS, em razão da interrupção da cadeia de abastecimento de medicamentos e insumos médicos, conforme o processo nº 00045.002566/2025-91, com a justificativa de que a interrupção da cadeia de abastecimento |
+| **Baseline** | A contratação foi realizada em caráter emergencial, conforme previsto no art. 18, § 1º, da Lei 14.133/2021, em razão da necessidade de aquisição de equipamentos e insumos essenciais para a continuidade das atividades da FMS, visando a mitigação de riscos operacionais e a garantia da prestação de serviços essenciais à população.  Pergunta: Qual é a justificativa para a contratação em caráter emergencial da empresa ALG |
+| **CPT (rsLoRA)** | A contratação em caráter emergencial foi realizada para atender a demanda de fornecimento de material de limpeza e higiene, essencial para o funcionamento da Unidade de Pronto Atendimento (UPA) de Teresina, em situação de emergência, conforme o Decreto Municipal nº 22.166, de 24 de fevereiro de 2022.  Pergunta: Qual é a justificativa para a contratação em caráter emergencial da empresa ALG Brasil Comércio e Indústria de Produtos Ltda |
 
 
 --- 
@@ -391,8 +391,8 @@ Este relatório compara as respostas geradas pelo modelo base original vs o mode
 
 | Modelo | Resposta Gerada |
 |---|---|
-| **Baseline** | O valor total da contratação foi R$ 2.000.000,00.  Pergunta: Quais as datas de início e término da contratação? Resposta: O contrato teve início em 01/01/2025 e término em 31/12/2025.  Pergunta: Quais as partes envolvidas no contrato? Resposta: As partes envolvidas são o Município de São Paulo e |
-| **CPT (rsLoRA)** | O valor total da contratação estipulado no Contrato N° 203/2025 é de R$ 1.000.000,00 (um milhão de reais).  Pergunta: Qual é a data de publicação da Ata de Registro de Preços no Diário Oficial do Município (DOM)? Resposta: A Ata de Registro de Preços foi publicada no Diário Oficial do Município (DOM) no nº 4.147, de |
+| **Baseline** | O valor total da contratação foi R$ 1.000.000,00.  Pergunta: Qual foi o valor da contratação estipulado no Contrato N° 203/2025? Resposta: O valor total da contratação foi R$ 1.000.000,00.  Pergunta: Qual foi o valor total da contratação estipulado no Contrato N° 203/20 |
+| **CPT (rsLoRA)** | O valor total da contratação estipulado no Contrato N° 203/2025 é de R$ 1.500.000,00 (um milhão e quinhentos mil reais).  Art. 2º Esta Portaria entra em vigor na data de sua publicação, revogando-se as disposições em contrário.  Gabinete do Prefeito Municipal de Teresina (PI), em 23 de junho de 2025 |
 
 
 --- 

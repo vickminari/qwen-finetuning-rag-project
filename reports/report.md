@@ -47,9 +47,22 @@ Embora ambas as etapas utilizem adaptadores PEFT/LoRA para treinar o modelo `Qwe
 ### 2. Análise do CPT (Q1)
 * **Dataset e Execução:** Focado no corpus bruto de diários oficiais dos municípios do Piauí (`diariosPrefeituras`). O modelo aprende a prever a próxima palavra com base no jargão jurídico-administrativo piauiense.
 * **Métricas Obtidas:** O benchmark avalia a capacidade de autocompletar e recuperar fatos específicos de decretos e portarias, demonstrando uma melhora expressiva na acurácia top-1 (61.39% para 78.59%) e uma redução drástica da perplexidade de validação para **2.4624**.
+* **Comparação Qualitativa (Modelo Baseline vs. Modelo CPT):**
+  Uma análise minuciosa das respostas presentes em benchmark_comparison_report.md destaca as seguintes diferenças comportamentais:
+  1. **Ancoragem ao Domínio Local vs. Alucinações Desconexas:**
+     - O **Modelo Baseline** carece de informações sobre a localidade, gerando alucinações geograficamente incoerentes. Por exemplo, na Q27, ele indica o "Município de São José do Rio Preto", na Q25 cita a "Companhia de Energia Elétrica do Rio de Janeiro", e na Q28 alucina que a indenização foi gerada por "veículos Chevrolet Corsa".
+     - O **Modelo CPT (rsLoRA)** apresenta alta relevância local. Mesmo quando alucina dados específicos, eles pertencem à realidade de Teresina, citando órgãos locais reais como **FMS** (Fundação Municipal de Saúde), **SEMEC**, **ETURB**, e **SEMA**, bem como endereços plausíveis do município (como na Q9: *"Rua Firmino Pires, nº 1175, bairro Centro... Teresina-PI"*).
+  2. **Estruturação de Layouts de Diários Oficiais:**
+     - O **Modelo CPT** internalizou a formatação tabular típica de publicações em diários oficiais, frequentemente gerando delimitadores e tabelas de dotação orçamentária (como `| ÓRGÃO | PROGRAMÁTICA | NATUREZA | VALOR` nas questões 5, 18 e 29) para organizar as informações financeiras.
+     - O **Modelo Baseline** falha em manter a estrutura do texto corrido e, sendo um modelo de base sem fine-tuning de instrução, preenche lacunas com placeholders vazios (como na Q12: `1. A CONTRATANTE: Nome: Endereço: Telefone:`) ou cai em loops de preenchimento gerando perguntas e respostas fictícias adicionais.
+  3. **Vocabulário de Negócio e Relações Semânticas:**
+     - O **Modelo CPT** demonstra assimilação do jargão técnico municipal. Na Q19, ele associa a SDU Centro com "manutenção e iluminação pública" (em contraste com o baseline, que a associa a "serviços de saúde"); na Q15 menciona a "Unidade de Alimentação Escolar (UAE)", termo técnico real de merenda da SEMEC; e na Q23 conecta a Comercial Cirúrgica Rioclarense ao fornecimento de insumos hospitalares.
+     - O **Modelo Baseline** restringe-se a respostas literais simples ou associa incorretamente siglas e nomes, como deduzir que a SMPM contratou a "SMPM Graphic" (Q9).
+  4. **Instabilidade de Geração:**
+     - Devido ao fato de ser um treinamento puramente de linguagem causal sem alinhamento de chat, ambos os modelos podem manifestar instabilidades na formatação e término do texto. Na Q25, por exemplo, o modelo CPT apresentou um loop de repetição infinita de caracteres (`C. A. L. C. C. C. C...`).
 * **Arquivos de Resultados Relacionados:**
-  - As métricas quantitativas de perplexidade e entropia estão registradas nos arquivos de resultados [baseline_evaluation.json](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/baseline_evaluation.json) (antes do treino) e [cpt_evaluation.json](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/cpt_evaluation.json) (pós-CPT).
-  - A comparação lado a lado de inferências qualitativas no benchmark de 30 questões está salva no arquivo [benchmark_comparison_report.md](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/benchmark_comparison_report.md).
+  - As métricas quantitativas de perplexidade e entropia estão registradas nos arquivos de resultados baseline_evaluation.json (antes do treino) e cpt_evaluation.json (pós-CPT).
+  - A comparação lado a lado de inferências qualitativas no benchmark de 30 questões está salva no arquivo benchmark_comparison_report.md.
 
 ---
 
@@ -67,8 +80,8 @@ O experimento de pós-treino compara o LoRA padrão com o rsLoRA, ambos utilizan
   - **Tempo de Treinamento:** Ambos os modelos apresentaram tempo de treinamento ativo muito semelhante: **13m04s** (784 segundos) para o Standard LoRA de Q2 e **12m03s** (723.5 segundos) para o rsLoRA de Q3 na GPU RTX 4070 Laptop, confirmando que a introdução do cálculo de estabilização do rsLoRA não traz qualquer overhead computacional durante o fine-tuning.
 
 * **Arquivos de Resultados Relacionados:**
-  - Os resultados das métricas de avaliação quantitativas estão salvos em [sft_evaluation.json](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/sft_evaluation.json) (para Q2) e [rslora_evaluation.json](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/rslora_evaluation.json) (para Q3).
-  - Os relatórios lado a lado comparando as respostas geradas contra o modelo baseline para as 25 perguntas do benchmark estruturado de [benchmark_sft.json](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/benchmark_sft.json) estão salvos em [sft_evaluation_report.md](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/sft_evaluation_report.md) (para Q2) e [rslora_evaluation_report.md](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/rslora_evaluation_report.md) (para Q3).
+  - Os resultados das métricas de avaliação quantitativas estão salvos em sft_evaluation.json (para Q2) e rslora_evaluation.json (para Q3).
+  - Os relatórios lado a lado comparando as respostas geradas contra o modelo baseline para as 25 perguntas do benchmark estruturado de benchmark_sft.json estão salvos em sft_evaluation_report.md (para Q2) e rslora_evaluation_report.md (para Q3).
 
 > [!TIP]
 > **Conclusão Qualitativa:** No benchmark qualitativo de 25 perguntas (`benchmark_sft.json`), ambos os modelos pós-fine-tuning alcançaram alto grau de alinhamento e corretude nas respostas técnicas de computação e estrutura da UFPI. Entretanto, o modelo de Q2 (Standard LoRA) tendeu a apresentar respostas ligeiramente mais robustas e com menor repetição de padrões textuais decorados do treino. Para que o rsLoRA com rank 64 superasse o LoRA padrão neste cenário, seria necessário reduzir a taxa de aprendizado para compensar o forte escalonamento de escala 2.0, ou expandir o volume de dados do dataset.
