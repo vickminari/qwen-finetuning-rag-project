@@ -1,0 +1,152 @@
+[
+  {
+    "instruction": "Em um contexto de Smart Campus, quais são os três principais grupos de partes interessadas (stakeholders) identificados e qual é o objetivo específico da gestão de patrimônio (Estate Management) ao monitorar a utilização de instalações?",
+    "input": "",
+    "output": "Os três principais stakeholders de um Smart Campus são a gestão de patrimônio (Estate Management), os estudantes e o corpo docente. O objetivo específico da gestão de patrimônio é monitorar a utilização em tempo real das instalações de todo o campus, uma necessidade impulsionada por fatores como a localização em áreas de alto valor imobiliário e a necessidade de suportar grandes volumes de estudantes (ex: mais de 50.000) em um campus centralizado."
+  },
+  {
+    "instruction": "Como a plataforma Microsoft IoT Core permite a implementação de soluções IoT completas sem a necessidade de um dispositivo tipo hub, e qual papel desempenha a Universal Windows Platform (UWP) nesse processo de desenvolvimento e gerenciamento de permissões?",
+    "input": "",
+    "output": "A plataforma Microsoft IoT Core permite a implementação de soluções IoT completas sem um hub centralizado ao conectar-se diretamente à plataforma de nuvem Azure, o que facilita a implementação, escalabilidade e gerenciamento. A Universal Windows Platform (UWP) atua como base para o desenvolvimento, permitindo que os programadores criem aplicações para qualquer dispositivo compatível (como PCs, Xbox ou dispositivos IoT) utilizando drivers. Por meio dessa arquitetura, o desenvolvedor concede ao dispositivo IoT as permissões necessárias para ler, escrever ou comunicar dados IoT na rede, viabilizando uma arquitetura distribuída."
+  },
+  {
+    "instruction": "No contexto de redes de sensores para aplicações de coleta de dados, quais são os três tipos de falhas que uma ferramenta de diagnóstico específica consegue identificar e como cada uma é categorizada?",
+    "input": "",
+    "output": "A ferramenta de diagnóstico descrita identifica três categorias distintas de falhas: 1) Falha 'self' (própria), onde o nó falha devido a uma parada, reinicialização, bug no código ou problema de conectividade; 2) Falha 'path' (caminho), onde um nó ao longo do caminho falha, causando falhas em nós subsequentes ou colisões no caminho; e 3) Falha 'sink' (base station), onde a rede inteira aparenta falhar devido a problemas na base central, como má localização, mudanças ambientais ou problemas de conectividade."
+  },
+  {
+    "instruction": "Descreva a lógica de implementação de uma estrutura condicional encadeada necessária para determinar a classificação de preço de combustível com base no valor pago por litro, especificando as condições de saída para valores inferiores a R$ 2,00, entre R$ 2,00 e R$ 2,40, e superiores a R$ 2,40.",
+    "input": "",
+    "output": "Para implementar essa lógica, deve-se utilizar uma estrutura condicional encadeada (aninhada) onde a primeira condição verifica se o valor é inferior a R$ 2,00; se for verdadeiro, exibe-se a mensagem 'Combustível muito barato'. Se a primeira condição for falsa, o fluxo avança para verificar se o valor está compreendido entre R$ 2,00 e R$ 2,40; se for verdadeiro, exibe-se 'Promoção'. Caso nenhuma das condições anteriores seja satisfeita (ou seja, o valor seja maior que R$ 2,40), o bloco final executa-se para exibir a mensagem 'Sem Promoção'. Essa estrutura permite tomar decisões sequenciais baseadas em múltiplas possibilidades de um único problema."
+  },
+  {
+    "instruction": "Quais são os cinco elementos fundamentais que a documentação de um processo deve descrever para garantir sua clareza e completude?",
+    "input": "",
+    "output": "A documentação de um processo deve descrever cinco elementos essenciais: o que é feito (produto), quando são executados os passos, por quem são realizados (agentes), o que é utilizado como entrada (insumos) e o que é produzido como resultado final."
+  },
+  {
+    "instruction": "Para um conjunto de dados com um número ímpar de elementos, qual é o índice específico do array que contém o valor da mediana, assumindo que o array já está ordenado e utiliza notação de índice baseada em zero?",
+    "input": "else {\nmediana = array[quant/2 + 1];\n}",
+    "output": "Para um conjunto com número ímpar de elementos, o valor da mediana corresponde ao elemento central exato. No entanto, a fórmula apresentada no trecho de código contém um erro lógico de indexação para arrays baseados em zero. O índice correto para o elemento central em um array de tamanho ímpar 'quant' é 'quant / 2' (usando divisão inteira). A expressão 'quant/2 + 1' apontaria para o segundo elemento após o centro, resultando em um valor incorreto. O índice correto deve ser 'quant / 2'."
+  },
+  {
+    "instruction": "Descreva a lógica de implementação de uma função recursiva para calcular a potência de um número real $x$ elevado a um expoente natural $n$, utilizando o método de multiplicações sucessivas, onde o resultado é definido como $x$ multiplicado por ele mesmo $n$ vezes.",
+    "input": "",
+    "output": "A implementação recursiva baseia-se na definição matemática $x^n = x \\times x \\times \\dots \\times x$ ($n$ vezes). A função deve ter uma condição de parada (caso base) quando $n = 0$, retornando 1, pois qualquer número elevado a zero é 1. Para $n > 0$, a função retorna o produto de $x$ pela chamada recursiva da função com o expoente decrementado em uma unidade ($x \\times \\text{potência}(x, n-1)$). Isso garante que a multiplicação seja executada sucessivamente até que o expoente atinja zero."
+  },
+  {
+    "instruction": "No contexto da implementação da classe Stack apresentada, qual é a função do bloco de código iniciado por 'new int [100]' dentro do construtor e como ele é gerenciado pelo destrutor?",
+    "input": "Stack() { // a constructor stackPtr = new int [100]; maxLen = 99; topPtr = -1; }; ~Stack () {delete [] stackPtr;};",
+    "output": "O bloco 'new int [100]' aloca dinamicamente um array de inteiros na memória heap, atribuindo o endereço ao ponteiro 'stackPtr' e definindo o tamanho máximo. O destrutor gerencia esse recurso executando 'delete [] stackPtr', que libera a memória alocada para o array, garantindo que o espaço seja devolvido ao sistema operacional quando a instância da classe é destruída."
+  },
+  {
+    "instruction": "Na gramática apresentada para a construção de sentenças (stmt), qual é a estrutura sintática específica utilizada para definir um loop de repetição e quais são os componentes obrigatórios entre parênteses que precedem a sentença subsequente?",
+    "input": "stmt if (expr ) stmt | for ( optexpr ; optexpr ; optexpr ) stmt | …",
+    "output": "A estrutura sintática utilizada para definir um loop de repetição é 'for'. Os componentes obrigatórios entre parênteses são três expressões opcionais (indicadas por 'optexpr') separadas por pontos e vírgula, que tipicamente representam a inicialização, a condição de continuação e a atualização do iterador, respectivamente, antes da execução da sentença (stmt) subsequente."
+  },
+  {
+    "instruction": "Em cenários de resposta a incidentes de bioterrorismo ou acidentes de laboratório, como a automação de processos de laboratório pode ser utilizada para mitigar riscos de contaminação cruzada e falhas humanas na manipulação de agentes patogênicos?",
+    "input": "",
+    "output": "A automação em laboratórios de biossegurança avançada atua como uma camada de proteção técnica contra erros humanos e contaminação cruzada, elementos críticos na gestão de bioterrorismo e acidentes de laboratório. Tecnicamente, a implementação de sistemas robóticos e de automação de fluxo de trabalho (workflow automation) permite a manipulação de patógenos dentro de ambientes de contenção fechados, minimizando a exposição direta do pessoal. Esses sistemas utilizam algoritmos de controle de processos para garantir a esterilização rigorosa entre amostras, monitoramento automático de parâmetros de segurança (como pressão diferencial e integridade de filtros HEPA) e registro imutável de todos os passos operacionais. A automação reduz a variabilidade humana, que é uma das principais causas de acidentes, e permite a escalabilidade da resposta a surtos sem comprometer os padrões de biossegurança, alinhando-se a estratégias de 'firepower in the lab' para a luta contra doenças infecciosas."
+  },
+  {
+    "instruction": "Quais são os quatro pilares temáticos fundamentais que estruturam o conteúdo de um curso focado na implementação de aplicações de Inteligência Artificial Generativa utilizando serviços de computação em nuvem?",
+    "input": "",
+    "output": "Os quatro pilares temáticos são: 1) Introdução à IA Generativa usando serviços de nuvem; 2) Engenharia de Prompts e Modelos Fundamentais (Foundation Models); 3) Considerações de Segurança e IA Generativa Responsável; e 4) Implementação de Aplicações de IA Generativa."
+  },
+  {
+    "instruction": "Qual é a distinção funcional entre a propriedade industrial/cultivares e o direito autoral no contexto da proteção de criações da mente?",
+    "input": "",
+    "output": "Enquanto a propriedade industrial e os cultivares referem-se a direitos sobre coisas intangíveis oriundas de inovações e criações da mente de forma geral, o direito autoral refere-se especificamente à obra intelectual (criação do espírito) e ao direito que o criador exerce diretamente sobre essa obra, permitindo-lhe usufruir de direitos econômicos sobre produtos e serviços resultantes dela."
+  },
+  {
+    "instruction": "Em qual contexto de programação é indicado o uso do comando 'for' e qual é a característica fundamental que determina a escolha deste comando em relação a outros laços de repetição?",
+    "input": "",
+    "output": "O comando 'for' (ou 'para') é indicado especificamente quando a quantidade de repetições do laço é conhecida e determinada previamente. A característica fundamental que justifica seu uso é que, ao iniciar a execução do comando, o número exato de iterações já é conhecido, seja por definição do programador ou por um parâmetro fornecido pelo usuário."
+  },
+  {
+    "instruction": "Explique como o princípio de 'indivisibilidade' se aplica ao conceito de atomicidade em transações de banco de dados e por que isso é essencial para a integridência dos dados.",
+    "input": "",
+    "output": "O princípio de 'indivisibilidade' é a base da propriedade de atomicidade em transações de banco de dados, que garante que uma transação seja tratada como uma unidade indivisível. Isso significa que todas as operações dentro da transação devem ser concluídas com sucesso; caso contrário, nenhuma delas será aplicada, evitando estados inconsistentes nos dados. Essa característica é essencial para manter a integridência dos dados, assegurando que o sistema nunca permaneça em um estado intermediário onde apenas parte da transação foi executada, o que poderia resultar em corrupção de dados ou inconsistências lógicas."
+  },
+  {
+    "instruction": "Em sistemas de processamento de linguagem natural (NLP) e mineração de dados, qual é o termo técnico utilizado para descrever o processo de gerar conjuntos de dados sintéticos de alta qualidade, como os exemplos de tweets sobre distúrbios públicos apresentados, com o objetivo específico de ajustar e melhorar o desempenho de modelos de linguagem (LLMs) através de técnicas de ajuste fino (fine-tuning)?",
+    "input": "",
+    "output": "O termo técnico é 'Geração de Dados Sintéticos' (Synthetic Data Generation). Este processo envolve a criação artificial de dados que imitam a distribuição estatística e as características semânticas de dados reais, mas que não foram coletados diretamente de fontes primárias. No contexto de ajuste fino (fine-tuning) de LLMs, a geração de dados sintéticos é crucial para expandir o corpus de treinamento, cobrir cenários de dados escassos (como distúrbios públicos específicos ou variações linguísticas), e mitigar vieses sem violar a privacidade dos usuários, permitindo que o modelo aprenda padrões complexos de linguagem e contexto social de forma ética e escalável."
+  },
+  {
+    "instruction": "Considerando que a classe 'Gerente' é uma extensão da classe 'Funcionario' e que um gerente é, por definição, um funcionário, qual princípio de polimorfismo ou relação de isonomia é implicitamente aplicado ao afirmar que 'todo momento que criarmos um objeto do tipo Gerente queremos que este objeto também herde os atributos definidos na classe Funcionario', e como isso impacta a manutenção do código caso uma nova informação precise ser adicionada a todos os funcionários?",
+    "input": "",
+    "output": "O princípio aplicado é a **Relação de Is-a (ou 'é um')**, fundamental para o polimorfismo e a hierarquia de classes. Ao estabelecer que um Gerente 'é um' Funcionario, garante-se que objetos do tipo Gerente podem ser tratados como objetos do tipo Funcionario. O impacto positivo na manutenção do código é a centralização da lógica comum: se uma nova informação (atributo) precisar ser adicionada a todos os funcionários, ela só precisa ser declarada na classe base 'Funcionario'. Todos os objetos derivados (como 'Gerente') herdarão automaticamente essa nova informação, eliminando a necessidade de modificar múltiplas classes separadamente ou duplicar código, o que resolve o problema de consistência e acoplamento excessivo."
+  },
+  {
+    "instruction": "Em um cenário de processamento de dados distribuídos, qual é o impacto da fragmentação de dados (sharding) baseada em chaves de usuário (ex: 'Jack', 'Noah', 'Kim') versus fragmentação geográfica para a consistência de leitura e latência, considerando que os dados estão armazenados em múltiplos nós?",
+    "input": "",
+    "output": "A fragmentação baseada em chaves de usuário (sharding por ID) tende a melhorar a consistência de leitura para consultas que acessam o histórico completo de um único usuário, pois todos os dados desse usuário residem em um único nó, evitando a necessidade de junções entre múltiplos nós. No entanto, isso pode aumentar a latência para consultas globais ou agregadas que precisam varrer todos os nós, pois o sistema não pode paralelizar a leitura de dados de usuários diferentes de forma eficiente se a distribuição não for aleatória. Já a fragmentação geográfica otimiza a latência para usuários acessando dados locais, mas pode comprometer a consistência de leitura para usuários que se movem entre regiões ou para consultas que exigem visão global, exigindo mecanismos de replicação síncrona ou assíncrona complexos para manter a integridade dos dados."
+  },
+  {
+    "instruction": "Quais são as principais vantagens do escalonamento estático em relação a outros métodos, considerando a natureza dos algoritmos utilizados e o comportamento do sistema?",
+    "input": "",
+    "output": "As principais vantagens incluem o suporte eficaz à implementação de relações de precedência entre processos (devido ao uso de algoritmos heurísticos), um comportamento do sistema completamente previsível e a manutenção de sobrecarga mínima durante a execução."
+  },
+  {
+    "instruction": "Em cenários de redes sem fio com células pequenas densas, qual abordagem de coordenação é considerada mais escalável e atraente para aplicações de Internet das Coisas (IoT), e qual é a principal limitação temporal associada às abordagens coordenadas centralizadas?",
+    "input": "",
+    "output": "As abordagens não coordenadas são consideradas mais escaláveis e atraentes para cenários de IoT, especialmente em implantações densas de células pequenas não coordenadas. Em contraste, as abordagens coordenadas por uma unidade de controle central apresentam uma limitação temporal significativa: devido às restrições rigorosas de temporização dos quadros de sinalização (beacon frames), a gestão da rede pode ser viável apenas em intervalos de tempo maiores, e não necessariamente no início de cada intervalo de sinalização."
+  },
+  {
+    "instruction": "Ao realizar uma limpeza de dados (data cleaning) em um conjunto de registros heterogêneos contendo endereços e telefones de diferentes municípios, qual técnica de normalização deve ser aplicada para padronizar o formato dos números de telefone antes de armazená-los em um banco de dados relacional, considerando exemplos como '(86) 98121-3701' e '(89) 9457-3377'?",
+    "input": "",
+    "output": "Deve-se aplicar uma função de normalização de strings que remova caracteres não numéricos (parênteses, hífen, espaços) e garanta que o número esteja no formato E.164 ou um padrão interno consistente (ex: '86981213701'). Isso envolve a extração dos dígitos significativos, verificação da validade do DDD (Discagem Direta a Distância) e a remoção de prefixos de discagem internacional ou nacional redundantes, assegurando que consultas e joins baseados em telefones sejam eficientes e precisos."
+  },
+  {
+    "instruction": "Em problemas de indução matemática aplicados a estruturas de dados ou algoritmos, como a abordagem por 'aumentação' difere fundamentalmente da abordagem por 'redução' em termos de como a hipótese de indução é aplicada para provar a validade da proposição para um tamanho n maior?",
+    "input": "",
+    "output": "Na abordagem por 'aumentação', parte-se de um objeto válido de tamanho menor (para o qual a hipótese de indução já é verdadeira) e constrói-se um objeto maior de tamanho n, garantindo que o processo de construção seja geral o suficiente para cobrir todos os casos possíveis de tamanho n. Já na abordagem por 'redução', parte-se de um objeto arbitrário de tamanho n e 'remove-se' uma parte específica dele para gerar um objeto menor válido; a hipótese de indução é aplicada diretamente a esse objeto menor resultante, assumindo que a remoção cria necessariamente um objeto válido para o qual a hipótese se aplica."
+  },
+  {
+    "instruction": "Quais são os comandos Docker Swarm específicos para inicializar um cluster, criar um serviço de balanceamento de carga com três réplicas, verificar o status dos contêineres, escalar o serviço para cinco réplicas e remover o serviço?",
+    "input": "docker swarm init\ndocker service create --replicas 3 nginx:latest\ndocker service ps nginx\ndocker service update --replicas 5 nginx:latest\ndocker service rm nginx",
+    "output": "Os comandos correspondentes são: 'docker swarm init' para inicializar o cluster; 'docker service create --replicas 3 nginx:latest' para implantar a aplicação com três réplicas; 'docker service ps nginx' para verificar o status; 'docker service update --replicas 5 nginx:latest' para escalar para cinco réplicas; e 'docker service rm nginx' para remover a aplicação do cluster."
+  },
+  {
+    "instruction": "Em sistemas de controle onde uma instrução de rele de controle mestre é executada com um sinal de entrada falso, qual é o comportamento subsequente das instruções dependentes e sob que condição esse estado é revertido?",
+    "input": "",
+    "output": "Quando a instrução de rele de controle mestre é executada com um sinal de entrada falso, o sinal de entrada para as linhas subsequentes também se torna falso. Esse estado permanece inalterado até que outra instrução de rele de controle mestre seja executada, independentemente do valor do sinal de entrada dessa nova instrução."
+  },
+  {
+    "instruction": "Como são classificadas a fila e a pilha em relação à estrutura de dados lista, e qual é a característica fundamental que diferencia a operação de uma fila da de uma pilha?",
+    "input": "",
+    "output": "A fila e a pilha são consideradas casos especiais da lista. A característica fundamental que as diferencia é que, numa fila, a inserção e a retirada são realizadas em extremos opostos (FIFO), enquanto numa pilha, ambas as operações ocorrem no mesmo extremo (LIFO)."
+  },
+  {
+    "instruction": "Em um contexto de programação procedural com escopo dinâmico, como é determinada a visibilidade das variáveis durante a execução de uma função chamada recursivamente ou aninhada, e quais variáveis estarão acessíveis na última função chamada de uma sequência de chamadas?",
+    "input": "",
+    "output": "No escopo dinâmico, a visibilidade das variáveis é determinada pela pilha de chamadas ativa no momento da execução, não pela posição física do código no arquivo. Durante a execução da última função chamada em uma sequência, são visíveis apenas as variáveis declaradas dentro dessa função específica e aquelas declaradas em funções que estão atualmente na pilha de chamadas (funções chamadoras ainda não retornadas). Variáveis declaradas em funções que já retornaram ou em funções que nunca foram chamadas não estão visíveis. Portanto, a visibilidade é restrita ao escopo da função atual e ao histórico de chamadas pendentes na pilha."
+  },
+  {
+    "instruction": "Descreva as vantagens do uso de Coordenadas Homogêneas na Computação Gráfica e explique como elas resolvem problemas de representação de números extremos.",
+    "input": "",
+    "output": "As principais vantagens do uso de Coordenadas Homogêneas são: permitir a representação de números reais utilizando inteiros, evitar problemas na representação de números muito grandes e facilitar operações matemáticas complexas. Elas resolvem problemas de representação de números extremos através da multiplicação por um fator de escala (homotetia). Por exemplo, o vetor (0.001, 0.002, 0.001) pode ser representado como (1, 2, 1, 1000), e um vetor com valores muito grandes como (5000000, 232000000, 44000000) pode ser simplificado para (5, 232, 44, 0.000001), mantendo a proporção geométrica sem perder precisão ou sofrer com limites de ponto flutuante."
+  },
+  {
+    "instruction": "No contexto de automação de planilhas eletrônicas, qual é o procedimento específico para gerar uma sequência numérica onde o valor de cada célula é obtido multiplicando-se o valor da célula anterior por um fator constante, em vez de somar um incremento fixo?",
+    "input": "",
+    "output": "Para gerar uma sequência onde o valor de cada célula é multiplicado pelo valor da anterior, deve-se configurar a opção de preenchimento da série com o tipo definido como 'Crescente'. Neste modo, o sistema aplica a lógica de multiplicação pelo incremento especificado ao valor da célula precedente, diferentemente do tipo 'Linear', que realiza uma adição uniforme do incremento a cada passo da sequência."
+  },
+  {
+    "instruction": "Qual é a condição obrigatória para utilizar editores de texto comuns (como Microsoft Word) na escrita de programas em Python?",
+    "input": "",
+    "output": "Para utilizar editores de texto comuns na escrita de programas em Python, é obrigatório configurar o software para gravar os arquivos exclusivamente no formato de texto puro (txt), evitando a inclusão de metadados, formatação rica ou cabeçalhos proprietários que tornariam o arquivo incompatível com a interpretação do interpretador Python."
+  },
+  {
+    "instruction": "Em sistemas de processamento de linguagem natural (NLP) e aprendizado de máquina, qual é o propósito principal de utilizar um conjunto de dados sintéticos composto por nomes próprios variados, como os listados, para o processo de ajuste fino (fine-tuning) de modelos de linguagem?",
+    "input": "",
+    "output": "O propósito principal é realizar um processo de regularização e aumento de dados (data augmentation) focado em mitigar o problema de sobreajuste (overfitting). Ao treinar ou ajustar um modelo com uma lista extensa e diversificada de entidades (neste caso, nomes próprios), o modelo aprende a generalizar padrões de tokenização e representação semântica, evitando que se especialize excessivamente em exemplos específicos de treinamento e melhorando sua robustez ao lidar com dados de distribuição diferente (generalização) em cenários reais."
+  },
+  {
+    "instruction": "Quais são os três pilares fundamentais abordados na obra 'Projeto Moderno de Compiladores' de Grune, Bal, Jacobs e Langendoen?",
+    "input": "",
+    "output": "A obra aborda os pilares fundamentais de: 1) Análise Léxica (construção de tokens e lexemas), 2) Análise Sintática (construção de árvores de derivação ou grafos de fluxo de controle para validar a estrutura da linguagem), e 3) Análise Semântica (verificação de tipos, escopo de variáveis e geração de código intermediário ou final)."
+  }
+]

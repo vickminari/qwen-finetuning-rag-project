@@ -6,3 +6,4 @@ q2_sft_model/
 q3_rslora_model/
 models/
 docs/
+faiss_index/

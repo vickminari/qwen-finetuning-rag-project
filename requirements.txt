@@ -23,11 +23,14 @@ triton; sys_platform == 'linux'  # Triton é exigido pelo Unsloth/FLA no Linux (
 # ou via github: pip install git+https://github.com/sustech-recom/flash-linear-attention.git
 
 # 3. Retrieval-Augmented Generation - RAG (Q5)
-# langchain>=0.2.0
-# langchain-community>=0.2.0
-# chromadb>=0.5.0
-# faiss-cpu>=1.8.0
-# sentence-transformers>=3.0.0  # Para geração de embeddings locais para o RAG
+langchain>=0.2.0
+langchain-community>=0.2.0
+chromadb>=0.5.0
+faiss-cpu>=1.8.0
+sentence-transformers>=3.0.0  # Para geração de embeddings locais para o RAG
+langchain-ollama 
+langgraph 
+ragas
 
 # 4. Guardrails & Segurança (Q6)
 # guardrails-ai>=0.4.0
