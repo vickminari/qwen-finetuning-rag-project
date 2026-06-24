@@ -52,13 +52,13 @@ def parse_args():
     parser.add_argument(
         "--output_report",
         type=str,
-        default="reports/sft_evaluation_report.md",
+        default="reports/q2_sft_evaluation_report.md",
         help="Relatório em markdown com a comparação lado a lado."
     )
     parser.add_argument(
         "--output_json",
         type=str,
-        default="reports/sft_evaluation.json",
+        default="reports/q2_sft_evaluation.json",
         help="Arquivo JSON para salvar métricas quantitativas."
     )
     parser.add_argument(

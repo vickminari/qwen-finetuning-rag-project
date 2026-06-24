@@ -121,7 +121,7 @@ Este comando irá:
 2. Carregar o adaptador LoRA treinado e recalcular as métricas de validação.
 3. Gerar um arquivo de benchmark com 25 questões (`benchmark_sft.json`).
 4. Rodar a inferência das 25 questões no baseline e no modelo pós-SFT.
-5. Salvar o relatório comparativo em [reports/sft_evaluation_report.md](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/sft_evaluation_report.md) e as métricas brutas em `reports/sft_evaluation.json`.
+5. Salvar o relatório comparativo em [reports/q2_sft_evaluation_report.md](file:///c:/Users/jvict/victors/estudos/aulas/topc_ia/trabalho_final/qwen-finetuning-rag-project/reports/q2_sft_evaluation_report.md) e as métricas brutas em `reports/q2_sft_evaluation.json`.
 
 *(Para avaliar o modelo da Questão 3, basta rodar o mesmo comando apontando `--adapter_path ./q3_sft_model`).*
 

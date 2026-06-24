@@ -48,7 +48,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     default_reports_dir = os.path.join(project_root, "reports")
-    default_output_json = os.path.join(default_reports_dir, "baseline_evaluation.json")
+    default_output_json = os.path.join(default_reports_dir, "q1_baseline_evaluation.json")
 
     parser.add_argument(
         "--output_json",

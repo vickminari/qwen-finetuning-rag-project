@@ -42,7 +42,7 @@ python evaluate_baseline.py --model_name "Qwen/Qwen3.5-2B-Base" --dataset_name "
 *   `--local_txt`: *(Opcional)* Se você possuir os diários em texto unificados localmente, forneça o caminho do arquivo `.txt` (ex: `--local_txt "caminho/para/diarios.txt"`), evitando o download automático do Hugging Face.
 *   `--max_samples`: Limita a quantidade de blocos (de 2048 tokens) para fins de velocidade na avaliação.
 
-Isso salvará as métricas quantitativas e algumas gerações qualitativas no arquivo `reports/baseline_evaluation.json`.
+Isso salvará as métricas quantitativas e algumas gerações qualitativas no arquivo `reports/q1_baseline_evaluation.json`.
 
 ---
 
@@ -76,7 +76,7 @@ python q1-pre_training/evaluate_cpt.py --model_name "Qwen/Qwen3.5-2B-Base" --ada
 
 > 💡 **Detecção Automática de Checkpoints:** Se o seu treinamento foi interrompido ou ainda está em andamento (ou seja, não foi salvo na raiz do diretório final), os scripts de avaliação detectam automaticamente a subpasta de checkpoint mais recente (ex: `checkpoint-1000`) dentro de `./q1_cpt_model` e carregam os adaptadores e o tokenizer a partir dela.
 
-O script carregará o modelo base, aplicará o adaptador LoRA correspondente, computará as métricas e imprimirá uma tabela mostrando a evolução (ex: a queda na Perplexidade e no Cross-Entropy Loss). Os resultados são salvos em `reports/cpt_evaluation.json`.
+O script carregará o modelo base, aplicará o adaptador LoRA correspondente, computará as métricas e imprimirá uma tabela mostrando a evolução (ex: a queda na Perplexidade e no Cross-Entropy Loss). Os resultados são salvos em `reports/q1_cpt_evaluation.json`.
 
 ---
 
@@ -90,7 +90,7 @@ python evaluate_benchmark.py --benchmark_json "benchmark_q1.json" --adapter_path
 
 > 💡 *Caso você ainda não possua o arquivo `benchmark_q1.json` criado, a primeira execução deste script criará um arquivo de exemplo com essa extensão para demonstrar a estrutura aceita.*
 
-Isso gerará o relatório Markdown `reports/benchmark_comparison_report.md` estruturando as perguntas, respostas de referência, respostas do modelo base e respostas do modelo CPT de forma comparativa.
+Isso gerará o relatório Markdown `reports/q1_benchmark_comparison_report.md` estruturando as perguntas, respostas de referência, respostas do modelo base e respostas do modelo CPT de forma comparativa.
 
 ---
 

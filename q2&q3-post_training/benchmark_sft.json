@@ -1,0 +1,127 @@
+[
+  {
+    "instruction": "Dado um conjunto de voos com restrições de tempo de conexão mínima de 1 hora e um orçamento limitado, qual é a estratégia algorítmica mais adequada para encontrar o caminho de menor custo entre duas cidades, e como os dados de partida, chegada e custo devem ser estruturados para alimentar esse algoritmo?",
+    "input": "",
+    "output": "A estratégia algorítmica mais adequada é a aplicação do Algoritmo de Dijkstra, que resolve o problema do caminho mais curto em grafos com pesos não negativos. Para estruturar os dados, deve-se modelar as cidades como nós (vértices) e os voos como arestas ponderadas pelo custo financeiro. A restrição de conexão mínima de 1 hora deve ser tratada como uma condição de pré-processamento ou como um peso infinito para arestas que não satisfazem o intervalo entre a chegada em um nó intermediário e a partida do próximo nó, garantindo que apenas conexões válidas sejam consideradas na busca pelo caminho de menor custo total."
+  },
+  {
+    "instruction": "Qual é a forma verbal correta para a primeira pessoa do plural do futuro do presente do verbo 'correr', considerando as regras de acentuação e conjugação padrão em português?",
+    "input": "",
+    "output": "A forma verbal correta é 'correremos'. Esta conjugação pertence ao futuro do presente do indicativo, na primeira pessoa do plural, mantendo a terminação regular '-emos' do verbo 'correr' sem alterações fonéticas ou ortográficas adicionais, diferentemente de formas como 'correrão' (terceira pessoa do singular) ou 'correremos' (primeira pessoa do plural)."
+  },
+  {
+    "instruction": "O que é a anomalia de Belady e como ela afeta o desempenho de um sistema que utiliza o algoritmo FIFO de substituição de páginas?",
+    "input": "",
+    "output": "A anomalia de Belady é uma deficiência específica do algoritmo FIFO (First-in, First-out) onde a quantidade de faltas de páginas pode aumentar quando o tamanho da memória também aumenta. Isso ocorre porque o FIFO substitui a página que foi carregada há mais tempo, independentemente de sua utilidade futura, o que pode levar à evicção de páginas frequentemente utilizadas em favor de páginas que não serão acessadas novamente, prejudicando o desempenho do sistema."
+  },
+  {
+    "instruction": "Como são classificadas a fila e a pilha em relação à estrutura de dados lista, e qual é a característica fundamental que diferencia a operação de uma fila da de uma pilha?",
+    "input": "",
+    "output": "A fila e a pilha são consideradas casos especiais da lista. A característica fundamental que as diferencia é que, numa fila, a inserção e a retirada são realizadas em extremos opostos (FIFO), enquanto numa pilha, ambas as operações ocorrem no mesmo extremo (LIFO)."
+  },
+  {
+    "instruction": "Descreva os dois critérios de decisão utilizados no algoritmo de redução ao primeiro octante para determinar se é necessário trocar as coordenadas x e y ou substituir valores por seus simétricos.",
+    "input": "",
+    "output": "O algoritmo utiliza dois testes lógicos: 1) Verifica-se se o produto dos incrementos (Δx * Δy) é negativo; se for, substituem-se os valores de y pelos simétricos e marca-se o flag 'simétrico' como verdadeiro. 2) Verifica-se se o valor absoluto de Δx é menor que o valor absoluto de Δy; se for, trocam-se as coordenadas x e y de cada extremo, trocam-se os valores de Δx e Δy, e marca-se o flag 'declive' como verdadeiro."
+  },
+  {
+    "instruction": "Qual é o impacto da complexidade dos módulos do padrão de codificação de vídeo H.264/AVC na implementação puramente por software para vídeos em alta definição, como Full HD (1920×1080 pixels), e qual taxa de quadros é alcançada sob essas condições?",
+    "input": "",
+    "output": "A alta complexidade dos módulos do padrão H.264/AVC torna difícil alcançar taxas de tempo real, como 30 quadros por segundo, em implementações puramente por software, especialmente quando se processam vídeos em alta definição. No entanto, é possível atingir uma taxa de 38 quadros por segundo ao processar quadros Full HD (1920×1080 pixels), desde que se utilize uma largura de banda de memória externa de aproximadamente 299 Mbytes por segundo."
+  },
+  {
+    "instruction": "Em um cenário de execução de instruções onde múltiplas instruções em uma estação de reserva (reservation station) estão prontas para execução em um mesmo ciclo de máquina, qual é o critério de seleção padrão utilizado por um algoritmo de agendamento para escolher qual instrução será emitida para a unidade funcional?",
+    "input": "",
+    "output": "O critério de seleção padrão utilizado é a política 'oldest first' (primeiro a chegar, primeiro a ser atendido), onde a instrução mais antiga na estação de reserva é escolhida para ser emitida e iniciar sua execução na unidade funcional."
+  },
+  {
+    "instruction": "Qual é a função principal do Scrum Master no contexto da implementação do processo Scrum?",
+    "input": "",
+    "output": "A função principal do Scrum Master é garantir o uso correto do processo Scrum e eliminar interferências externas que possam atrapalhar o fluxo de trabalho da equipe."
+  },
+  {
+    "instruction": "Quais são as principais vantagens e desvantagens associadas ao uso de variáveis locais em subprogramas, como em C e Java, em comparação com variáveis dinâmicas do monte?",
+    "input": "",
+    "output": "As variáveis locais em subprogramas (como em C e Java) oferecem a vantagem de permitir a recursão e conservar o armazenamento, pois suas alocações são estáticas e vinculadas à declaração. No entanto, apresentam desvantagens como sobrecarga na alocação e liberação de memória, referências ineficientes devido ao endereçamento indireto, e o fato de os subprogramas não serem sensíveis ao histórico de execução. Em contraste, as variáveis dinâmicas do monte (heap) são anônimas, referenciadas apenas por ponteiros, e exigem alocação e liberação explícitas, o que prevê um gerenciamento de armazenamento dinâmico, mas impõe a desvantagem de exigir gerenciamento manual ou automático (como garbage collection) para evitar vazamentos de memória."
+  },
+  {
+    "instruction": "Quais são as três principais desvantagens associadas ao uso do algoritmo de marcação-varrer (mark-sweep) para gerenciamento de memória, especificamente relacionadas à frequência da execução, ao impacto na performance e à complexidade de implementação?",
+    "input": "",
+    "output": "As três principais desvantagens são: 1) A coleta de lixo é realizada com pouca frequência, o que pode levar à fragmentação de memória; 2) Quando executada, o processo causa atrasos significativos na execução da aplicação devido à sobrecarga de CPU; 3) A implementação é complexa, pois requer a configuração inicial de indicadores para todas as células, um processo de marcação não trivial e a manutenção de uma lista de espaços disponíveis, além de lidar com dificuldades específicas de gerenciamento de montes para células de tamanho único."
+  },
+  {
+    "instruction": "Quais são as três arquiteturas de clusterização de aplicações web mais comuns e como elas diferem em termos de disponibilidade dos nós para atender solicitações de clientes?",
+    "input": "",
+    "output": "As três arquiteturas mais comuns são: 1) Ativa-ativa, onde todos os nós do cluster estão ativos e atendem simultaneamente às solicitações; 2) Ativa-passiva, onde apenas um nó está ativo atendendo aos clientes, enquanto os demais ficam em modo de espera para assumir o controle em caso de falha do nó ativo; e 3) Multimestre, onde vários nós podem estar ativos ao mesmo tempo para processar as requisições."
+  },
+  {
+    "instruction": "Qual é a principal propriedade estrutural que define o modelo matemático de uma lista, conforme a definição técnica apresentada?",
+    "input": "",
+    "output": "A principal propriedade estrutural de uma lista é a posição relativa dos elementos dentro da sequência linear."
+  },
+  {
+    "instruction": "Calcule a diferença de pontuação entre a coluna P1 e a coluna P2 para o registro que possui o maior valor absoluto de diferença entre essas duas métricas de desempenho, considerando apenas os registros onde ambos os valores estão presentes.",
+    "input": "20219003210 10,0 10,0 - 20199015656 10,0 8,0 - 20199013179 10,0 8,0 - 20199028126 10,0 7,5 - 20199041496 10,0 8,5 - 2013956383 - - - 20199054073 7,6 7,0 - 20199012716 8,8 9,5 - 20199000985 8,4 9,0 - 20199010936 10,0 8,0 - 20199006030 7,2 8,0 - 20169062987 8,2 - - 20199022534 10,0 9,5 - 20199008114 10,0 7,5 - 20199022801 9,5 5,0",
+    "output": "O registro com maior diferença absoluta é o identificado por 20199022801, que apresenta 9,5 na coluna P1 e 5,0 na coluna P2. A diferença calculada é de 4,5 pontos (9,5 - 5,0 = 4,5)."
+  },
+  {
+    "instruction": "Em C, ao utilizar a função scanf para ler dois valores de ponto flutuante em um único campo de formato, qual é a sintaxe correta para o argumento de formato e quais são as implicações de segurança e precisão ao comparar esses valores diretamente com zero usando o operador de igualdade (==)?",
+    "input": "scanf(\"%f%f\", &p.x, &p.y);",
+    "output": "A sintaxe correta para ler dois valores de ponto flutuante em uma única chamada é usar o formato \"%f%f\" (ou \"%f %f\"), onde cada conversão especifica um endereço de variável. A comparação direta de valores de ponto flutuante com zero (ou qualquer outro número) usando o operador == é tecnicamente problemática devido à natureza binária da representação de ponto flutuante (IEEE 754), que pode introduzir erros de arredondamento mínimos. Embora a comparação com zero exato seja geralmente segura (pois zero tem representação exata), em cenários de cálculos complexos, recomenda-se verificar se o valor está dentro de uma margem de erro (epsilon) em vez de exigir igualdade exata."
+  },
+  {
+    "instruction": "Quais são as características físicas e de posicionamento que permitem a operação dos 'smart dust motes' em ambientes específicos?",
+    "input": "",
+    "output": "Devido ao seu pequeno tamanho e leve peso, os 'smart dust motes' podem ser anexados a objetos ou até mesmo flutuar no ar, permitindo uma versatilidade de posicionamento que difere de redes de sensores convencionais."
+  },
+  {
+    "instruction": "Qual é a origem histórica e o objetivo primário dos projetos que deram origem à tecnologia e conceitos fundamentais da Internet, conforme descrito no contexto de redes de comunicação?",
+    "input": "",
+    "output": "A tecnologia e os conceitos fundamentais da Internet surgiram de projetos conduzidos ao longo dos anos 60 pelo Departamento de Defesa dos Estados Unidos. O objetivo primário desses projetos era o desenvolvimento de uma rede de computadores capaz de facilitar a comunicação entre os principais centros militares de comando e controle."
+  },
+  {
+    "instruction": "Quais são os três principais sistemas de numeração discutidos no contexto da evolução histórica e das características inerentes dos sistemas numéricos em eletrônica digital?",
+    "input": "",
+    "output": "Os três principais sistemas de numeração identificados são o Sistema Decimal, o Sistema Binário e o Sistema Hexadecimal. O texto destaca que esses sistemas possuem características inerentes comuns e descreve a evolução histórica que levou ao desenvolvimento dessas bases numéricas, sendo o binário fundamental para a representação de dados em computadores devido à sua simplicidade na implementação eletrônica (ligado/desligado)."
+  },
+  {
+    "instruction": "No contexto da arquitetura de rede HomeKit, qual é o componente principal definido e como os dispositivos são agrupados para implementar uma solução, considerando a ausência de um gateway centralizado obrigatório?",
+    "input": "",
+    "output": "O componente principal de uma rede HomeKit é o acessório (dispositivo). Os dispositivos são agrupados com base nos tipos específicos de serviços que eles podem fornecer. A implementação de uma solução HomeKit inicia-se pela ativação de um grupo de serviços previamente definidos, onde os serviços implementam características que definem as interações entre si, permitindo que usuários e dispositivos comuniquem-se diretamente via Siri e aplicativos HomeKit sem a necessidade de um hub centralizado para garantir a comunicação."
+  },
+  {
+    "instruction": "No contexto de estruturas de dados lineares, qual é a diferença fundamental entre a implementação estática e dinâmica de um Tipo Abstrato de Dados (TAD) de Pilha, e como essa escolha impacta a alocação de memória durante a execução do programa?",
+    "input": "",
+    "output": "A diferença fundamental reside na forma como a memória é alocada para armazenar os elementos da pilha. Na implementação estática, o tamanho máximo da pilha é definido em tempo de compilação, geralmente utilizando um array com tamanho fixo, o que impede o crescimento além desse limite e pode levar a erros de estouro de pilha (stack overflow) se a quantidade de dados exceder a capacidade prevista. Já na implementação dinâmica, a memória é alocada em tempo de execução (frequentemente via alocação dinâmica de memória ou listas encadeadas), permitindo que a pilha cresça ou diminua conforme a necessidade, adaptando-se ao volume de dados processado, embora isso possa introduzir uma pequena sobrecarga de gerenciamento de memória."
+  },
+  {
+    "instruction": "Dado o código `s.find('tigres', 30)` executado na string `s='um tigre, dois tigres, três tigres'`, qual é o resultado retornado e qual é a lógica técnica que justifica esse resultado específico?",
+    "input": "s='um tigre, dois tigres, três tigres'\ncódigo: s.find('tigres', 30)",
+    "output": "O resultado retornado é `-1`. A lógica técnica é que a função `find()` inicia a busca pelo índice especificado (neste caso, 30) até o fim da string. Como a substring 'tigres' não existe na string original (apenas 'tigre' existe), e a busca começa em uma posição onde não há mais ocorrências válidas da substring alvo, a função conclui que a substring não foi encontrada no intervalo de busca e retorna `-1`."
+  },
+  {
+    "instruction": "Qual é a diferença fundamental entre o comportamento de propagação de um 'Trojan horse' (Cavalo de Troia) e um vírus em relação aos arquivos do hospedeiro?",
+    "input": "",
+    "output": "A diferença técnica reside na forma de infecção e propagação: um Trojan horse geralmente reside no computador do usuário e se multiplica atacando outras máquinas na rede, muitas vezes sem infectar diretamente os arquivos do hospedeiro da mesma forma que um vírus. Já um vírus infecta especificamente os arquivos do hospedeiro (por exemplo, quando um arquivo é enviado via e-mail), permitindo que ele se espalhe para outros usuários ao modificar esses arquivos."
+  },
+  {
+    "instruction": "Em um protocolo de controle de acesso ao canal baseado em turnos de fala, qual é a hierarquia de regras aplicada para determinar quem fala a seguir, considerando a recusa do ouvinte em aceitar a oferta de palavra?",
+    "input": "",
+    "output": "A hierarquia de regras aplicada é a seguinte: Primeiro, a Regra 1 é acionada, onde o falante corrente solicita a palavra ao próximo (fazendo uma pergunta, opinião ou pedido). Se o ouvinte rejeitar essa oferta, aplica-se a Regra 2, onde outra pessoa decide iniciar a fala. Caso a Regra 2 não seja acionada (ou seja, ninguém mais se voluntaria), aplica-se a Regra 3, onde o falante corrente continua falando. Essas regras são executadas recursivamente até que um novo turno de fala seja estabelecido."
+  },
+  {
+    "instruction": "Qual é a função principal de um algoritmo de consenso distribuído, como o Paxos ou o Raft, em um cluster de servidores, e por que ele é essencial para a integridade dos dados em ambientes onde falhas são esperadas?",
+    "input": "",
+    "output": "A função principal de um algoritmo de consenso distribuído, como Paxos ou Raft, é garantir que todos os nós de um cluster distribuído concordem sobre um único estado compartilhado ou sobre a ordem das operações, mesmo na presença de falhas de hardware ou de rede. Em ambientes onde falhas são esperadas, esses algoritmos são essenciais para a integridade dos dados porque impedem que o sistema entre em estados inconsistentes ou divergentes. Eles asseguram que, se uma operação de escrita for aceita por uma maioria de nós, ela será replicada e confirmada em todos os nós saudáveis, permitindo que o sistema continue operando corretamente (Disponibilidade) e mantenha a consistência dos dados (Consistência) após a recuperação da falha, cumprindo assim dois dos três requisitos do Teorema CAP."
+  },
+  {
+    "instruction": "No contexto do algoritmo de ordenação por inserção, qual é a fórmula matemática para calcular o número de comparações no pior caso para um vetor de tamanho n, e qual é a complexidade assintótica correspondente?",
+    "input": "",
+    "output": "Para o pior caso, onde o vetor está ordenado de forma decrescente (ex: 5, 4, 3, 2, 1), o número de comparações C(n) é dado pela soma da progressão aritmética de 1 até n-1, resultando na fórmula C(n) = (n² - n) / 2. A complexidade assintótica correspondente é O(n²), classificada como um custo quadrático."
+  },
+  {
+    "instruction": "Explique a relação entre a qualidade dos atores (desenvolvedores ou arquitetos de software) e a credibilidade das histórias (casos de uso ou requisitos) em um projeto de desenvolvimento de software, e como a combinação de ambos pode levar a um resultado descrito como 'lame' (fraco).",
+    "input": "",
+    "output": "Em engenharia de software, a credibilidade de um projeto depende diretamente da competência técnica dos desenvolvedores ('atores') e da viabilidade dos requisitos ou casos de uso ('histórias'). Se os desenvolvedores são altamente qualificados mas trabalham com requisitos fantasiosos, incompreensíveis ou mal definidos ('histórias inacreditáveis'), o resultado final tende a ser um sistema funcional mas inútil ou de baixa qualidade ('lame'). A sinergia entre profissionais competentes e requisitos sólidos é essencial para evitar produtos que, embora tecnicamente possíveis, falham em entregar valor real ou resolvem problemas que não existem."
+  }
+]
