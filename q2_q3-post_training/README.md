@@ -17,18 +17,18 @@ pip install requests datasets tqdm
 ### 1. Executando com Ollama (Padrão)
 Se o seu Ollama está rodando localmente (normalmente na porta `11434`) com o modelo `qwen3.5:9b` (ou similar):
 ```bash
-python generate_questions.py --backend ollama --model qwen3.5:9b --target_count 1000
+python q2_q3-post_training/generate_questions.py --backend ollama --model qwen3.5:9b --target_count 1000
 ```
 
 Se o seu modelo tiver outro nome ou tag, use a flag `--model`:
 ```bash
-python generate_questions.py --backend ollama --model qwen2.5:7b --target_count 1000
+python q2_q3-post_training/generate_questions.py --backend ollama --model qwen2.5:7b --target_count 1000
 ```
 
 ### 2. Executando com vLLM
 Se você está servindo o modelo usando vLLM (normalmente na porta `8000` com endpoint compatível com OpenAI):
 ```bash
-python generate_questions.py --backend vllm --api_url http://localhost:8000 --model Qwen/Qwen3.5-2B-Instruct --target_count 1000
+python q2_q3-post_training/generate_questions.py --backend vllm --api_url http://localhost:8000 --model Qwen/Qwen3.5-2B-Instruct --target_count 1000
 ```
 
 ---
@@ -70,7 +70,7 @@ Para revisar e refinar o dataset em equipe, foram criados scripts de integraçã
 Após a geração das perguntas, você pode enviá-las para a plataforma utilizando o script:
 ```bash
 # Certifique-se de ter o pacote instalado: pip install argilla
-python q2-post_training/push_to_argilla.py --file perguntas_docentes.json --dataset_name docentes_dc_sft
+python q2_q3-post_training/push_to_argilla.py --file perguntas_docentes.json --dataset_name docentes_dc_sft
 ```
 *(Se preferir enviar o progresso parcial do checkpoint sem esperar terminar as 1000, o script detectará automaticamente o arquivo `.jsonl` de checkpoint se o `.json` final não existir).*
 
@@ -81,7 +81,7 @@ python q2-post_training/push_to_argilla.py --file perguntas_docentes.json --data
 ### 3. Baixar o Dataset Revisado e Aprovado
 Após a revisão humana, execute o script a seguir para baixar apenas as perguntas **aprovadas** e com todas as **correções de texto** já aplicadas:
 ```bash
-python q2-post_training/pull_from_argilla.py --output perguntas_docentes_final.json --dataset_name docentes_dc_sft
+python q2_q3-post_training/pull_from_argilla.py --output perguntas_docentes_final.json --dataset_name docentes_dc_sft
 ```
 O arquivo final `perguntas_docentes_final.json` conterá apenas os dados limpos e validados pelo grupo, pronto para o ajuste fino (SFT).
 
@@ -94,7 +94,7 @@ O script `sft_training.py` realiza o ajuste fino de instruções (SFT) do modelo
 ### Como rodar o Treinamento (Q2 - LoRA Padrão)
 Para iniciar o fine-tuning usando os dados curados:
 ```bash
-python q2-post_training/sft_training.py --model_name Qwen/Qwen3.5-2B-Base --dataset_path perguntas_docentes_final.json --output_dir ./q2_sft_model --epochs 3
+python q2_q3-post_training/sft_training.py --model_name Qwen/Qwen3.5-2B-Base --dataset_path perguntas_docentes_final.json --output_dir ./q2_sft_model --epochs 3
 ```
 *   *(Nota: Se você não realizou a etapa do Argilla ainda e deseja rodar o treino com o dataset bruto gerado inicialmente, altere `--dataset_path` para `perguntas_docentes.json`).*
 *   *(Dica: Se a sua GPU estiver sem memória VRAM livre, adicione a flag `--load_in_4bit` para rodar o treino via QLoRA 4-bit).*
@@ -102,7 +102,7 @@ python q2-post_training/sft_training.py --model_name Qwen/Qwen3.5-2B-Base --data
 ### Como rodar o Treinamento (Q3 - rsLoRA)
 Para rodar a Questão 3 (rsLoRA), basta adicionar a flag `--use_rslora` e alterar a pasta de destino:
 ```bash
-python q2-post_training/sft_training.py --model_name Qwen/Qwen3.5-2B-Base --dataset_path perguntas_docentes_final.json --output_dir ./q3_sft_model --epochs 3 --use_rslora
+python q2_q3-post_training/sft_training.py --model_name Qwen/Qwen3.5-2B-Base --dataset_path perguntas_docentes_final.json --output_dir ./q3_sft_model --epochs 3 --use_rslora
 ```
 
 ---
@@ -114,7 +114,7 @@ O script `evaluate_sft.py` computa as métricas quantitativas (Perplexidade e Lo
 ### Como rodar a Avaliação
 Após concluir o treinamento SFT, execute:
 ```bash
-python q2-post_training/evaluate_sft.py --model_name Qwen/Qwen3.5-2B-Base --adapter_path ./q2_sft_model --dataset_path perguntas_docentes_final.json
+python q2_q3-post_training/evaluate_sft.py --model_name Qwen/Qwen3.5-2B-Base --adapter_path ./q2_sft_model --dataset_path perguntas_docentes_final.json
 ```
 Este comando irá:
 1. Carregar o modelo baseline e calcular a perplexidade no split de teste (10%).
