@@ -36,8 +36,16 @@ def output_guardrail(resposta_gerada: str, contexto_recuperado: str) -> bool:
     # Limpa o texto básico para análise de palavras-chave
     def get_keywords(text):
         words = re.findall(r'\b\w{4,}\b', text.lower()) # palavras com mais de 4 letras
-        # Remove stopwords comuns em português (simplificado)
-        stopwords = {'para', 'com', 'uma', 'como', 'mais', 'pelo', 'pela', 'este', 'esta'}
+        # Lista de stopwords em português com 4 ou mais letras (já que get_keywords filtra < 4 letras)
+        # incluindo também termos de controle do sistema para evitar falsos positivos na correspondência
+        stopwords = {
+            'para', 'como', 'mais', 'pelo', 'pela', 'pelas', 'pelos', 'isso', 'isto', 'aquilo', 
+            'entre', 'depois', 'mesmo', 'seus', 'suas', 'quem', 'esse', 'essa', 'esses', 'essas', 
+            'este', 'esta', 'estes', 'estas', 'aquele', 'aquela', 'aqueles', 'aquelas', 'eles', 
+            'elas', 'você', 'meu', 'minha', 'numa', 'qual', 'nós', 'deles', 'delas', 'tudo', 
+            'todo', 'toda', 'todos', 'todas', 'outro', 'outra', 'outros', 'outras', 'sobre', 
+            'então', 'muito', 'resposta', 'pergunta', 'contexto'
+        }
         return set(words) - stopwords
 
     palavras_contexto = get_keywords(contexto_recuperado)
