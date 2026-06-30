@@ -1,0 +1,43 @@
+# ==============================================================================
+# Q4 — Destilação de Conhecimento (Knowledge Distillation)
+# q4-knowledge_distillation/
+# ==============================================================================
+#
+# Instalação recomendada:
+#
+#   1. PyTorch com CUDA (ajuste cu128 conforme sua GPU):
+#      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+#
+#   2. Dependências desta pasta:
+#      pip install -r q4-knowledge_distillation/requirements.txt
+#
+# Pré-requisito externo: Ollama rodando localmente com os professores
+#   ollama pull qwen3:14b
+#   ollama pull gemma3:12b
+#
+# ==============================================================================
+
+# --- Geração de dataset CoT (generate_dataset_cot.py) ---
+requests>=2.31.0
+openai>=1.30.0          # Cliente compatível com API /v1 do Ollama
+datasets>=3.0.0         # Carregar databricks/databricks-dolly-15k
+
+# --- Treinamento SFT do aluno (sft_training.py) ---
+unsloth                 # Aceleração opcional; sem ele usa Transformers + PEFT
+torch>=2.6.0
+transformers>=5.5.0
+peft>=0.12.0
+trl>=0.10.0
+accelerate>=0.34.0
+bitsandbytes>=0.43.0    # QLoRA 4-bit (--load_in_4bit)
+packaging
+
+# --- Avaliação (evaluate_models.py) ---
+tqdm>=4.66.0
+
+# --- Linux / WSL (exigido pelo Unsloth para alguns modelos Qwen 3.5) ---
+triton; sys_platform == 'linux'
+
+# --- Flash Linear Attention (camadas do Qwen 3.5; instale se faltar) ---
+# pip install fla
+# ou: pip install git+https://github.com/sustech-recom/flash-linear-attention.git
