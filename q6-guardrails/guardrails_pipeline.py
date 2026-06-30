@@ -1,15 +1,9 @@
+import os
+os.environ["HF_TRUST_REMOTE_CODE"] = "1"
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from filters import input_guardrail, output_guardrail
 
-# 1. Configuração do modelo (Mantido opcional/mockado para os testes rápidos)
-# Se você não quiser carregar o modelo real de 15GB durante os testes rápidos,
-# deixe estas linhas de carregamento comentadas e use o simulador abaixo.
-"""
-model_name = "Qwen/Qwen2.5-7B-Instruct" 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
-"""
 def call_qwen_local(prompt: str) -> str:
     """Simulador (Mock) do Qwen otimizado usando dicionário de mapeamento."""
     prompt_lower = prompt.lower()
@@ -55,28 +49,96 @@ def call_qwen_local(prompt: str) -> str:
     # Caso padrão se nada for encontrado
     return "Não encontrei essa informação no contexto fornecido."
 
-# 3. Execução do Fluxo Seguro (Nome ajustado para bater com o run_tests.py)
-def gerar_resposta_segura(pergunta: str, contexto: str) -> str:
+def inicializar_modelo_real(model_name: str = "Qwen/Qwen3.5-2B-Base", adapter_path: str = "vickminari/qwen3.5-2b-sft-baseline"):
+    """
+    Carrega o modelo base e aplica o adaptador LoRA de SFT do Hugging Face ou local.
+    """
+    print(f"[LLM] Carregando modelo base: {model_name}...")
+    
+    # Verifica se CUDA está disponível para melhor performance
+    dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else torch.float16
+    device_map = "auto" if torch.cuda.is_available() else {"": "cpu"}
+    
+    tokenizer_path = adapter_path if adapter_path else model_name
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+        
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        dtype=dtype,
+        device_map=device_map,
+        trust_remote_code=True
+    )
+    
+    if adapter_path:
+        from peft import PeftModel
+        print(f"[LLM] Aplicando adaptador LoRA SFT de: {adapter_path}...")
+        model = PeftModel.from_pretrained(model, adapter_path)
+        
+    model.eval()
+    return model, tokenizer
+
+def gerar_resposta_llm_real(prompt: str, model, tokenizer, max_new_tokens: int = 150) -> str:
+    """
+    Executa a geração de texto real no modelo carregado.
+    """
+    device = next(model.parameters()).device
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    
+    with torch.no_grad():
+        outputs = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=True,
+            temperature=0.1,
+            top_p=0.9,
+            pad_token_id=tokenizer.eos_token_id
+        )
+        
+    input_length = inputs.input_ids.shape[1]
+    generated_tokens = outputs[0][input_length:]
+    return tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
+
+def gerar_resposta(
+    pergunta: str,
+    contexto: str,
+    usar_guardrails: bool = True,
+    usar_modelo_real: bool = False,
+    model = None,
+    tokenizer = None
+) -> str:
+    """
+    Executa o fluxo de resposta, aplicando ou contornando os guardrails com base nas flags.
+    """
     # ---- AVALIAÇÃO DO GUARDRAIL DE ENTRADA ----
-    if not input_guardrail(pergunta):
-        return "⚠️ Erro de Segurança: Input do usuário detectado como potencialmente malicioso."
+    if usar_guardrails:
+        if not input_guardrail(pergunta):
+            return "⚠️ Erro de Segurança: Input do usuário detectado como potencialmente malicioso."
 
     # Constrói o Prompt estruturado
     prompt_instrucao = f"Contexto: {contexto}\n\nPergunta: {pergunta}"
     
-    # Executa a inferência (Simulada pelo dicionário ou Real pelo Qwen)
-    resposta_qwen = call_qwen_local(prompt_instrucao)
+    # Executa a inferência (Simulada ou Real)
+    if usar_modelo_real and model is not None and tokenizer is not None:
+        resposta_qwen = gerar_resposta_llm_real(prompt_instrucao, model, tokenizer)
+    else:
+        resposta_qwen = call_qwen_local(prompt_instrucao)
 
     # ---- AVALIAÇÃO DO GUARDRAIL DE SAÍDA (Evita Alucinação) ----
-    if not output_guardrail(resposta_qwen, contexto):
-        return "⚠️ Bloqueio de Segurança: A resposta gerada divergiu do contexto permitido (Alucinação detectada)."
+    if usar_guardrails:
+        if not output_guardrail(resposta_qwen, contexto):
+            return "⚠️ Bloqueio de Segurança: A resposta gerada divergiu do contexto permitido (Alucinação detectada)."
 
     return resposta_qwen
 
-# Exemplo de teste manual rápido
+# Wrapper retrocompatível
+def gerar_resposta_segura(pergunta: str, contexto: str) -> str:
+    return gerar_resposta(pergunta, contexto, usar_guardrails=True, usar_modelo_real=False)
+
 if __name__ == "__main__":
     ctx = "O repositório qwen-finetuning-rag-project aplica técnicas de RAG com segurança."
     qst = "O que o repositório faz?"
     
     resultado_validado = gerar_resposta_segura(qst, ctx)
-    print("Resultado do Fluxo:", resultado_validado)
+    print("Resultado do Fluxo (Mock com Guardrails):", resultado_validado)
