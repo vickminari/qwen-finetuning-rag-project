@@ -4,19 +4,21 @@ def input_guardrail(user_query: str) -> bool:
     """
     Retorna True se o input for seguro. Retorna False se detectar tentativa de burla.
     """
-    # Lista de termos comuns em ataques de Prompt Injection
-    blacklist = [
-        "ignore as instruções anteriores",
-        "ignore as diretrizes",
-        "ignore as regras",
-        "act as a",
-        "você agora é um modo developer",
-        "delete system prompt"
+    # Lista de padrões regex comuns em ataques de Prompt Injection
+    blacklist_patterns = [
+        r"ignore\s+(as\s+)?(instruções|diretrizes|regras|restrições)",
+        r"esqueça\s+(as\s+regras|as\s+diretrizes|as\s+instruções|o\s+filtro)",
+        r"ignorando\s+(as\s+)?(regras|instruções|diretrizes|restrições)",
+        r"act\s+as\s+a",
+        r"agir\s+como\s+(um\s+)?(pirata|desenvolvedor|administrador|developer|modo)?",
+        r"aja\s+como\s+(um\s+)?(pirata|desenvolvedor|administrador|developer|modo)?",
+        r"você\s+agora\s+é\s+(um\s+)?(modo\s+)?developer",
+        r"delete\s+system\s+prompt"
     ]
     
     query_lower = user_query.lower()
-    for term in blacklist:
-        if term in query_lower:
+    for pattern in blacklist_patterns:
+        if re.search(pattern, query_lower):
             return False
             
     # Bloqueia perguntas excessivamente longas que tentam estourar o contexto (exemplo)
