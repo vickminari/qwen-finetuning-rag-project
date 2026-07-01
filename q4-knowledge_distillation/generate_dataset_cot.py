@@ -12,13 +12,9 @@ if SCRIPT_DIR not in sys.path:
 
 from config import (
     TEACHERS,
-    DATASET_HF_NAME,
-    DATASET_SPLIT,
+    DATASET_PRESETS,
+    DEFAULT_DATASET_PRESET,
     DATASET_SEED,
-    DOLLY_INSTRUCTION_FIELD,
-    DOLLY_CONTEXT_FIELD,
-    DOLLY_RESPONSE_FIELD,
-    DOLLY_CATEGORY_FIELD,
     COT_DATASET_PATH,
     COT_CHECKPOINT_PATH,
     COT_TARGET_COUNT,
@@ -27,6 +23,8 @@ from config import (
     OLLAMA_TEMPERATURE,
     format_cot_output,
     get_teacher,
+    get_dataset_preset,
+    normalize_source_row,
 )
 
 
@@ -42,10 +40,18 @@ def parse_args():
         help="Chave do professor em config.TEACHERS (ex: qwen3-14b, gemma3-12b)",
     )
     parser.add_argument(
+        "--dataset_preset",
+        type=str,
+        default=DEFAULT_DATASET_PRESET,
+        choices=list(DATASET_PRESETS.keys()),
+        help="Preset de dataset com mapeamento de campos (portuguese_dolly, canarim)",
+    )
+    parser.add_argument(
         "--dataset",
         type=str,
-        default=DATASET_HF_NAME,
-        help="Repositório Hugging Face ou caminho local (.json / .jsonl)",
+        default=None,
+        help="Repositório Hugging Face ou caminho local (.json / .jsonl). "
+             "Se omitido, usa o hf_name do preset.",
     )
     parser.add_argument(
         "--api_url",
@@ -82,32 +88,28 @@ def parse_args():
         type=str,
         nargs="*",
         default=None,
-        help="Filtrar categorias do Dolly (ex: closed_qa open_qa). Vazio = todas.",
+        help="Filtrar categorias (ex: closed_qa open_qa). Válido sobretudo para portuguese_dolly.",
     )
     return parser.parse_args()
 
 
-def load_dolly_dataset(dataset_source, categories=None):
+def load_source_dataset(dataset_source, preset, categories=None):
     """
-    Carrega o dataset Databricks Dolly-15k via Hugging Face ou arquivo local.
-    Retorna lista de dicts com instruction, context, response, category.
+    Carrega dataset fonte via Hugging Face ou arquivo local.
+    Normaliza registros para instruction, context, response, category.
     """
     if os.path.exists(dataset_source):
-        return load_local_dataset(dataset_source, categories)
+        return load_local_dataset(dataset_source, preset, categories)
 
+    split = preset.get("split", "train")
     try:
         print(f"📥 Carregando dataset do Hugging Face '{dataset_source}'...")
         from datasets import load_dataset
 
-        dataset = load_dataset(dataset_source, split=DATASET_SPLIT)
+        dataset = load_dataset(dataset_source, split=split)
         rows = []
         for row in dataset:
-            item = {
-                "instruction": row.get(DOLLY_INSTRUCTION_FIELD, "").strip(),
-                "context": row.get(DOLLY_CONTEXT_FIELD, "") or "",
-                "response": row.get(DOLLY_RESPONSE_FIELD, "").strip(),
-                "category": row.get(DOLLY_CATEGORY_FIELD, "general").strip(),
-            }
+            item = normalize_source_row(row, preset)
             if item["instruction"] and item["response"]:
                 rows.append(item)
         print(f"✅ Dataset carregado! Registros válidos: {len(rows)}")
@@ -124,8 +126,8 @@ def load_dolly_dataset(dataset_source, categories=None):
     return rows
 
 
-def load_local_dataset(path, categories=None):
-    """Carrega dataset local JSON ou JSONL no formato Dolly."""
+def load_local_dataset(path, preset, categories=None):
+    """Carrega dataset local JSON ou JSONL e normaliza campos conforme o preset."""
     print(f"📂 Carregando dataset local: {path}")
     rows = []
 
@@ -143,17 +145,9 @@ def load_local_dataset(path, categories=None):
 
     normalized = []
     for row in rows:
-        instruction = row.get("instruction") or row.get("prompt", "")
-        context = row.get("context") or row.get("input", "") or ""
-        response = row.get("response") or row.get("output", "") or row.get("answer", "")
-        category = row.get("category", "general")
-        if str(instruction).strip() and str(response).strip():
-            normalized.append({
-                "instruction": str(instruction).strip(),
-                "context": str(context).strip() if context else "",
-                "response": str(response).strip(),
-                "category": str(category).strip(),
-            })
+        item = normalize_source_row(row, preset)
+        if item["instruction"] and item["response"]:
+            normalized.append(item)
 
     if categories:
         categories_lower = {c.lower() for c in categories}
@@ -288,6 +282,9 @@ def main():
     args = parse_args()
     random.seed(args.seed)
 
+    preset_key, preset_cfg = get_dataset_preset(args.dataset_preset)
+    dataset_source = args.dataset or preset_cfg["hf_name"]
+
     teacher_key, teacher_cfg = get_teacher(args.teacher)
     model_name = teacher_cfg["ollama_name"]
 
@@ -295,7 +292,8 @@ def main():
     print("🧠 GERADOR DE DATASET CoT — DESTILAÇÃO DE CONHECIMENTO (Q4)")
     print("=" * 80)
     print(f"Professor: {teacher_cfg['display_name']} ({model_name})")
-    print(f"Dataset: {args.dataset}")
+    print(f"Preset: {preset_key} — {preset_cfg['description']}")
+    print(f"Dataset: {dataset_source}")
     print(f"Meta de exemplos: {args.target_count}")
     print("=" * 80)
 
@@ -303,7 +301,7 @@ def main():
     os.makedirs(os.path.dirname(args.checkpoint_file) or ".", exist_ok=True)
 
     try:
-        raw_data = load_dolly_dataset(args.dataset, args.categories)
+        raw_data = load_source_dataset(dataset_source, preset_cfg, args.categories)
     except Exception as exc:
         print(f"❌ Erro ao carregar dataset: {exc}")
         return

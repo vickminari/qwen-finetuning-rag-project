@@ -25,17 +25,44 @@ DEFAULT_OUTPUT_JSON = os.path.join(REPORTS_DIR, "q4_kd_evaluation.json")
 DEFAULT_ADAPTER_DIR = os.path.join(SCRIPT_DIR, "models")
 
 # =============================================================================
-# Dataset fonte (Databricks Dolly-15k)
+# Dataset fonte — presets com mapeamento de campos
 # =============================================================================
-DATASET_HF_NAME = "databricks/databricks-dolly-15k"
-DATASET_SPLIT = "train"
+DATASET_PRESETS = {
+    "portuguese_dolly": {
+        "hf_name": "botbotrobotics/PortugueseDolly",
+        "split": "train",
+        "instruction_field": "instruction",
+        "context_field": "context",
+        "context_fallbacks": ["input"],
+        "response_field": "response",
+        "response_fallbacks": ["output", "answer"],
+        "category_field": "category",
+        "description": "Dolly-15k traduzido para pt-BR (~15k exemplos)",
+    },
+    "canarim": {
+        "hf_name": "dominguesm/Canarim-Instruct-PTBR-Dataset",
+        "split": "train",
+        "instruction_field": "instruction",
+        "context_field": "context",
+        "context_fallbacks": ["input"],
+        "response_field": "output",
+        "response_fallbacks": ["response", "answer"],
+        "category_field": None,
+        "description": "Instruções nativas em português (~316k exemplos)",
+    },
+}
+
+DEFAULT_DATASET_PRESET = "portuguese_dolly"
 DATASET_SEED = 42
 
-# Campos esperados no Dolly-15k
-DOLLY_INSTRUCTION_FIELD = "instruction"
-DOLLY_CONTEXT_FIELD = "context"
-DOLLY_RESPONSE_FIELD = "response"
-DOLLY_CATEGORY_FIELD = "category"
+# Atalhos derivados do preset padrão (retrocompatibilidade)
+_DEFAULT_PRESET = DATASET_PRESETS[DEFAULT_DATASET_PRESET]
+DATASET_HF_NAME = _DEFAULT_PRESET["hf_name"]
+DATASET_SPLIT = _DEFAULT_PRESET["split"]
+DOLLY_INSTRUCTION_FIELD = _DEFAULT_PRESET["instruction_field"]
+DOLLY_CONTEXT_FIELD = _DEFAULT_PRESET["context_field"]
+DOLLY_RESPONSE_FIELD = _DEFAULT_PRESET["response_field"]
+DOLLY_CATEGORY_FIELD = _DEFAULT_PRESET["category_field"] or "category"
 
 # =============================================================================
 # Professores (Teachers) — servidos via Ollama
@@ -149,6 +176,60 @@ COT_ANSWER_MARKER = "### Resposta:"
 # =============================================================================
 # Helpers
 # =============================================================================
+
+def get_dataset_preset(preset_key=None):
+    """Retorna configuração do preset de dataset (campos HF e mapeamento)."""
+    key = preset_key or DEFAULT_DATASET_PRESET
+    if key not in DATASET_PRESETS:
+        raise ValueError(
+            f"Preset '{key}' não encontrado. Opções: {list(DATASET_PRESETS.keys())}"
+        )
+    return key, DATASET_PRESETS[key]
+
+
+def extract_dataset_field(row, primary, fallbacks=None):
+    """Lê um campo do registro, tentando nomes alternativos se necessário."""
+    candidates = [primary] if primary else []
+    if fallbacks:
+        candidates.extend(fallbacks)
+    for name in candidates:
+        if not name:
+            continue
+        value = row.get(name)
+        if value is not None and str(value).strip():
+            return str(value).strip()
+    return ""
+
+
+def normalize_source_row(row, preset):
+    """Normaliza um registro bruto para instruction, context, response, category."""
+    instruction = extract_dataset_field(
+        row,
+        preset["instruction_field"],
+        ["prompt", "question"],
+    )
+    context = extract_dataset_field(
+        row,
+        preset.get("context_field"),
+        preset.get("context_fallbacks", ["input"]),
+    )
+    response = extract_dataset_field(
+        row,
+        preset["response_field"],
+        preset.get("response_fallbacks", ["output", "answer"]),
+    )
+    category_field = preset.get("category_field")
+    category = extract_dataset_field(row, category_field) if category_field else ""
+    if not category:
+        category = "general"
+
+    return {
+        "instruction": instruction,
+        "context": context,
+        "response": response,
+        "category": category,
+    }
+
 
 def get_teacher(teacher_key=None):
     key = teacher_key or DEFAULT_TEACHER_KEY
