@@ -1,0 +1,25 @@
+nohup: ignoring input
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+================================================================================
+🧠 GERADOR DE DATASET CoT — DESTILAÇÃO DE CONHECIMENTO (Q4)
+================================================================================
+Professor: Gemma3-12B (Ollama) (gemma3:12b)
+Preset: portuguese_dolly — Dolly-15k traduzido para pt-BR (~15k exemplos)
+Dataset: botbotrobotics/PortugueseDolly
+Meta de exemplos: 1000
+================================================================================
+📥 Carregando dataset do Hugging Face 'botbotrobotics/PortugueseDolly'...
+✅ Dataset carregado! Registros válidos: 15000
+
+🔄 Checkpoint encontrado: '/home/maria_martins/qwen-finetuning-rag-project/q4-knowledge_distillation/data/cot_dataset_checkpoint.jsonl'
+✅ Retomando com 1863 exemplos de 1001 fontes.
+
+🎉 Meta de 1000 exemplos já atingida!
+
+💾 Salvando 1863 exemplos em '/home/maria_martins/qwen-finetuning-rag-project/q4-knowledge_distillation/data/cot_dataset.json'...
+
+================================================================================
+✅ Geração do dataset CoT concluída!
+📁 Arquivo: /home/maria_martins/qwen-finetuning-rag-project/q4-knowledge_distillation/data/cot_dataset.json
+📝 Total de exemplos: 1863
+================================================================================

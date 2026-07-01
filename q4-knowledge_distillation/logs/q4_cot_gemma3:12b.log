@@ -1,0 +1,8 @@
+nohup: ignoring input
+usage: generate_dataset_cot.py [-h] [--teacher {qwen3-14b,gemma3-12b}]
+                               [--dataset_preset {portuguese_dolly,canarim}]
+                               [--dataset DATASET] [--api_url API_URL]
+                               [--target_count TARGET_COUNT] [--output OUTPUT]
+                               [--checkpoint_file CHECKPOINT_FILE]
+                               [--seed SEED] [--categories [CATEGORIES ...]]
+generate_dataset_cot.py: error: argument --teacher: invalid choice: 'gemma3:12b' (choose from 'qwen3-14b', 'gemma3-12b')
