@@ -1,0 +1,23 @@
+nohup: ignoring input
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+================================================================================
+🚀 SFT DO ALUNO (STUDENT) — Q4 DESTILAÇÃO DE CONHECIMENTO
+================================================================================
+Aluno: Qwen3.5-2B-Base
+Modelo HF: Qwen/Qwen3.5-2B-Base
+Dataset: data/cot_qwen3-14b.json
+Saída LoRA: models/qwen3-14b/qwen3.5-2b_sft
+QLoRA 4-bit: False
+================================================================================
+⚡ Unsloth detectado — treinamento acelerado.
+
+📥 Carregando Qwen/Qwen3.5-2B-Base via Unsloth...
+Unsloth: WARNING `trust_remote_code` is True.
+Are you certain you want to do remote code execution?
+==((====))==  Unsloth 2026.6.9: Fast Qwen3_5 patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA GeForce RTX 5070 Ti. Num GPUs = 1. Max memory: 15.476 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 12.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.35. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
